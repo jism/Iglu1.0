@@ -1,18 +1,19 @@
+<%-- 
+    Document   : Solicitudes
+    Created on : 14/03/2015, 12:04:53 AM
+    Author     : JesúsIván
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
-
-<html lang="en">
-
-<head>
-=======
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
->>>>>>> master
+
+<head>
     <title>Videojuegos Iglu</title>
     <meta charset="utf-8">
 
@@ -40,79 +41,52 @@ and open the template in the editor.
                 	<h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
                     <nav>
                         <ul class="menu">
-                            <li><a href="index.html">Categorias</a></li>
-                            <li><a href="index.html">Contacto</a></li>
-                            <li><a href="index.html">Registrarse</a></li>
-<<<<<<< HEAD
-                            <li><a href="Administrador.jsp">Iniciar Sesion</a></li>
-=======
-                            <li><a href="index.html">Iniciar Sesion</a></li>
->>>>>>> master
+                            <li><a href="index.html">Subir Videojuego</a></li>
+                            <li><a href="Solicitudes.jsp">Revisar Solicitudes</a></li>
+                            <li><a href="index.html">CERRAR SESION</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
-        
-
-
+       
         <div class="row-bot">
         	<div class="row-bot-bg">
             	<div class="main">
         
-		  <article class="column-3">
-                	<div class="indent-left">
-                        <div class="maxheight indent-bot">
-                            <h3>Categorias</h3>
-                            <ul class="list-1">
-                            
-                                <li><a href="#">Accion</a></li>
-                                <li><a href="#">Aventura</a></li>
-                                <li><a href="#">Coches</a></li>
-                                <li><a href="#">Deportes</a></li>
-						<li><a href="#">De Mesa</a></li>
-                                <li><a href="#">Disparos</a></li>
-						<li><a href="#">Infantiles</a></li>
-						<li><a href="#">Multijugador</a></li>
-
-                                <li><a href="#">Puzzles</a></li>
-                            </ul>
-                        </div>
-                        <a class="button-2" href="#">Ver Mas</a>
-                    </div>
-                </article>
-        
-
-
-
-                    <div class="slider-wrapper">
-                        <div class="slider">
-                            <ul class="items">
-                                <li>
-                                    <img src="images/slider-img1.jpg" alt="" />
-                                </li>
-                                <li>
-                                    <img src="images/slider-img2.jpg" alt="" />
-                                </li>
-                                <li>
-                                    <img src="images/slider-img3.jpg" alt="" />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <font color="white">
+                    <table style="width:100%" color="white">
+                        <tr>
+                            <td>Jesus Saavedra</td>
+                            <td>UNAM</td> 
+                            <td>309203094</td>
+                            <td>HISTORIAL</td>
+                            <td>
+                                <form action="CreditoOtorgado.jsp">
+                                    Creditos: $<input type="text" name="fname">
+                                    <input type="submit" value="Otorgar Creditos">
+                                </form>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Uriel Quezada</td>
+                            <td>UNAM</td> 
+                            <td>309136593</td>
+                            <td>HISTORIAL</td>
+                            <td>
+                                <form action="CreditoOtorgado.jsp">
+                                    Creditos: $<input type="text" name="fname">
+                                    <input type="submit" value="Otorgar Creditos">
+                                </form>
+                            </td>
+                          </tr>
+                        </table>    
+                    </font>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        
-        
-=======
->>>>>>> master
     </header>
     
-    
-    
-
     <section id="content"><div class="ic"></div>
         <div class="main">
             <div class="wrapper img-indent-bot">
@@ -133,11 +107,7 @@ and open the template in the editor.
                 <article class="column-2">
                 	<div class="maxheight indent-bot">
                         <h3 class="p1">Bienvenidos Estudiantes</h3>
-<<<<<<< HEAD
-                        <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempeño academico que te serviran para comprar los mejores videojuegos</h6>
-=======
                         <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempeÃ±o academico que te serviran para comprar los mejores videojuegos</h6>
->>>>>>> master
                         <p class="p2">Solo tienes que dar clic en <a href="index.html" target="_blank">Registrarse</a>  llenar tus datos y sube tu historial academico </p>
                         Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.
                     </div>
@@ -174,3 +144,5 @@ and open the template in the editor.
     </script>
 </body>
 </html>
+
+
