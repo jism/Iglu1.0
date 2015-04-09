@@ -9,7 +9,7 @@
 <html lang="en">
 
     <head>  
-    <title>Videojuegos Iglu</title>
+        <title>Administrador</title>
     <meta charset="utf-8">
     
     <!-- 
@@ -40,9 +40,9 @@
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
                                 <li><a href="index.html">Categorias</a></li>
-                                <li><a href="index.html">Contacto</a></li>
-                                <li><a href="index.html">Registrarse</a></li>
-                                <li><a href="Administrador.jsp">Iniciar Sesion</a></li>
+                                <li><a href="Solicitudes">Solicitudes</a></li>
+                                <li><a href="index.html">Subir Videojuego</a></li>
+                                <li><a href="index.html">Cerrar Sesion</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -54,10 +54,8 @@
                 <div class="row-bot-bg">
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->    
-                    
-                       
-                       
-                        <!-- TERMINA SECCION A EDITAR -->
+
+                    <!-- TERMINA SECCION A EDITAR -->
                     </div>
                 </div>
             </div>
@@ -76,18 +74,6 @@
                     </article>
                     <article class="col-2">
                 	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
-                    </article>
-                </div>
-                
-                <!-- Informacion acerca de la pagina respecto a los creditos que se otorgan a estudiantes-->
-                <div class="wrapper">
-                    <article class="column-2">
-                	<div class="maxheight indent-bot">
-                            <h3 class="p1">Bienvenidos Estudiantes</h3>
-                            <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempeño academico que te serviran para comprar los mejores videojuegos</h6>
-                            <p class="p2">Solo tienes que dar clic en <a href="index.html" target="_blank">Registrarse</a>  llenar tus datos y sube tu historial academico </p>
-                            <p class="p2">Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</p>
-                        </div>
                     </article>
                 </div>
             </div>
