@@ -268,6 +268,8 @@ h6 {color:#769e02;}
 .list-2 span {float:right; text-align:right; width:auto; font-weight:normal;}
 .list-2 dt span {font-weight:bold;}
 
+td{color: #fff}
+
 .price-list li {
 	overflow: hidden; 
 	vertical-align: top;

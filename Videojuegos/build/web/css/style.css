@@ -245,7 +245,7 @@ h6 {color:#769e02;}
 	background:url(../images/button2-tail.gif) 0 0 repeat-x #779f02;
 	cursor:pointer;
 }
-.button-2:hover {background:#ff0000;}
+.button-2:hover {background:#B40404;}
 
 .list-1 li {
 	line-height:18px; 
@@ -256,7 +256,7 @@ h6 {color:#769e02;}
 		display:inline-block;
 		color:#ffffff;
 	}
-	.list-1 a:hover {color:#d53a03; text-decoration:underline;}
+	.list-1 a:hover {color:#000000;}
 	.list-1 span {display:block; line-height:25px; padding:8px 0 17px;}
 	.list-1 strong {display:block;}
 	
@@ -267,6 +267,8 @@ h6 {color:#769e02;}
 .list-2 em {font-style:normal; float:left;}
 .list-2 span {float:right; text-align:right; width:auto; font-weight:normal;}
 .list-2 dt span {font-weight:bold;}
+
+td{color: #fff}
 
 .price-list li {
 	overflow: hidden; 
