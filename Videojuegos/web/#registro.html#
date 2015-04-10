@@ -1,19 +1,8 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-
-<head>
-=======
 
 <html lang="en">
 
     <head>  
->>>>>>> master
     <title>Videojuegos Iglu</title>
     <meta charset="utf-8">
     
@@ -38,44 +27,6 @@ and open the template in the editor.
             <!-- Encabezado de la pagina. Seccion de la pagina con fondo negro-->
             <div class="row-top">
         	<div class="main">
-<<<<<<< HEAD
-            	<div class="wrapper">
-                	<h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
-                    <nav>
-                        <ul class="menu">
-                            <li><a href="index.html">Categorias</a></li>
-                            <li><a href="index.html">Contacto</a></li>
-                            <li><a href="Registro.html">Registrarse</a></li>
-                            <li><a href="index.html">Iniciar Sesion</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        
-
-
-        <div class="row-bot">
-        	<div class="row-bot-bg">
-            	<div class="main">
-        
-		  <article class="column-3">
-                	<div class="indent-left">
-                        <div class="maxheight indent-bot">
-                            <h3>Categorias</h3>
-                            <ul class="list-1">
-                            
-                                <li><a href="#">Accion</a></li>
-                                <li><a href="#">Aventura</a></li>
-                                <li><a href="#">Coches</a></li>
-                                <li><a href="#">Deportes</a></li>
-						<li><a href="#">De Mesa</a></li>
-                                <li><a href="#">Disparos</a></li>
-						<li><a href="#">Infantiles</a></li>
-						<li><a href="#">Multijugador</a></li>
-
-                                <li><a href="#">Puzzles</a></li>
-=======
                     <div class="wrapper">
                         <!-- Encabezado de pagina que manda a la pagina principal -->
                         <h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
@@ -85,12 +36,7 @@ and open the template in the editor.
                                 <li><a href="index.html">Categorias</a></li>
                                 <li><a href="index.html">Contacto</a></li>
                                 <li><a href="index.html">Registrarse</a></li>
-<<<<<<< HEAD
                                 <li><a href="Administrador.jsp">Iniciar Sesion</a></li>
->>>>>>> master
-=======
-                                <li><a href="IniciarSesion">Iniciar Sesion</a></li>
->>>>>>> de63e14c05b2e32ec9e095c8d4697959e28cfe19
                             </ul>
                         </nav>
                     </div>
@@ -103,58 +49,34 @@ and open the template in the editor.
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->    
                     
-                        <!-- Barra lateral izquierda con las categorias de los videojuegos -->
-                        <article class="column-3">
-                            <div class="indent-left">
-                                <div class="maxheight indent-bot">
-                                    <h3>Categorias</h3>
-                                    <ul class="list-1">
-                                        <li><a href="#">Accion</a></li>
-                                        <li><a href="#">Aventura</a></li>
-                                        <li><a href="#">Coches</a></li>
-                                        <li><a href="#">Deportes</a></li>
-                                        <li><a href="#">De Mesa</a></li>
-                                        <li><a href="#">Disparos</a></li>
-					<li><a href="#">Infantiles</a></li>
-					<li><a href="#">Multijugador</a></li>
-                                        <li><a href="#">Puzzles</a></li>
-                                    </ul>
-                                </div>
-                                <a class="button-2" href="#">Ver Mas</a>
-                            </div>
-                        </article>
+					<font color="black">
+					<p align=center><a href="login.jsp">Iniciar sesión</a>
+7					</br>
+                    <font size="7"> Registro</font></p>
+					</br>
         
-                        <!-- Slider de las 3 imagenes principales de la pagina -->
-                        <div class="slider-wrapper">
-                            <div class="slider">
-                                <ul class="items">
-                                    <li>
-                                        <img src="images/slider-img1.jpg" alt="" />
-                                    </li>
-                                    <li>
-                                        <img src="images/slider-img2.jpg" alt="" />
-                                    </li>
-                                    <li>
-                                        <img src="images/slider-img3.jpg" alt="" />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+        
+        
+        <form action="Register" method="post">
+            <p>Nombre: <input type="text" name="nombre"></p>
+            <p>Apellido Paterno: <input type="text" name="email"></p>
+			<p>Apellido Materno: <input type="text" name="email"></p>
+			<p>Correo electrónico: <input type="text" name="correo"></p>
+			<p>Universidad: <input type="text" name="email"></p>
+			<p>Número de cuenta: <input type="text" name="email"></p>
+			<p>Email: <input type="text" name="email"></p>
+            <input type="file" name="file"/> 
+			<br /> 
+			<input type="submit" value="Subir Imagen" /> 
+            <p>Confirma contraseña <input type="password" name="password2"></p>
+            <p><input type="submit" value="Registrar"></p>
+        </form></font>
                        
                         <!-- TERMINA SECCION A EDITAR -->
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        
-        
-    </header>
-    
-    
-=======
         </header>
->>>>>>> master
     
         <!-- Seccion de la pagina con fondo blanco-->
         <section id="content"><div class="ic"></div>
