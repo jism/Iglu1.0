@@ -50,7 +50,7 @@
                     
                         <article class="column-2">
                         <h3>Registro</h3>
-                        <form action="Register" method="post">
+                        <form action="Registrarse" method="post">
                             <pre>Nombre:                   <input type="text" name="nombre"></pre>
                             <pre>Apellido Paterno:      <input type="text" name="appat"></pre>
                             <pre>Apellido Materno:      <input type="text" name="apmat"></pre>
@@ -65,7 +65,7 @@
                         <article class="column-2">
                 	<div class="maxheight indent-bot">
                             <h3 class="p1">Bienvenidos Estudiantes</h3>
-                            <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempeño academico que te serviran para comprar los mejores videojuegos</h6>
+                            <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempe?o academico que te serviran para comprar los mejores videojuegos</h6>
                             <h6 class="p2">Solo tienes que dar clic en Registrarse llenar tus datos y sube tu historial academico </h6>
                             <h6 class="p2">Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</h6>
                         </div>

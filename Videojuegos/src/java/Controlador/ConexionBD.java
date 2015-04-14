@@ -11,8 +11,6 @@ package Controlador;
  * @author Ivan
  */
 import java.sql.*;
-import java.util.Scanner;
-
 /**
  *
  * @author ivan
@@ -25,7 +23,7 @@ public class ConexionBD{
         ResultSet rs1, rs2;
 
     public ConexionBD(){
-        url = "jdbc:postgresql:backupIglu.backup";
+        url = "jdbc:postgresql://localhost:5432/Iglu";
         username = "postgres";
         password = "89631139";
         conexion = null;
@@ -34,7 +32,33 @@ public class ConexionBD{
         rs1=null;
         rs2 = null;
         
-    } 
+    }
+    
+    public void registrarse(String nombre, String appat, String apmat, String correoe, String universidad, String cuenta){
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+
+            p.sentencia.executeUpdate("insert into estudiante(nombre, appat, apmat, correoe, universidad, nocuenta) values('"+nombre+"', '"+appat+"', '"+apmat+"', '"+correoe+"', '"+universidad+"', '"+cuenta+"')");
+            p.sentencia.close();
+        }catch (SQLException e){
+            System.out.println("Error "+e);
+        }catch (Exception e){
+            System.out.println("Error "+e);
+        }finally{
+            if(p.conexion != null){
+                try{
+                    p.conexion.close();
+                }catch(SQLException e){
+                    System.out.println("Error "+e);
+                }
+                }
+        }
+    }
+
     
     public static void main(String[] args) {
         ConexionBD p = new ConexionBD();
@@ -45,8 +69,9 @@ public class ConexionBD{
         p.sentencia = p.conexion.createStatement();
         
         //Ejemplo consulta
-        
-        p.rs1 = p.sentencia.executeQuery("Select * From administrador");
+        //p.sentencia.executeUpdate("insert into estudiante (correoe) values('");
+        p.rs1 = p.sentencia.executeQuery("Select * From estudiante");
+        p.registrarse("ivan", "s", "m", "iv@ciencias", "unam", "3");
             while(p.rs1.next()){
                 System.out.println(p.rs1.getString("correoe")+" - "+ p.rs1.getString("nombre"));
             }
