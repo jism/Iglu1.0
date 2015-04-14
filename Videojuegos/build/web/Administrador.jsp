@@ -35,13 +35,13 @@
         	<div class="main">
                     <div class="wrapper">
                         <!-- Encabezado de pagina que manda a la pagina principal -->
-                        <h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
+                        <h1><a href="Administrador.jsp">VideojuegosIglu<span>.com</span></a></h1>
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="index.html">Categorias</a></li>
+                                <li><a href="#">Categorias</a></li>
                                 <li><a href="Solicitudes">Solicitudes</a></li>
-                                <li><a href="index.html">Subir Videojuego</a></li>
+                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
                             </ul>
                         </nav>
@@ -53,8 +53,30 @@
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
-                    <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->    
-
+                    <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
+                    
+                    
+                    
+                    
+                    <article class="column-1">
+                	<div class="maxheight indent-bot">
+                            <h3 class="p1">Administrador</h3>
+                            <h6 class="p2">Has accedido como administrador</h6>
+                            <h6 class="p2">Desde Admiistrador puedes revisar las solicitudes de los estudiantes para poder otorgar creditos</h6>
+                            <h6 class="p2">Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</h6>
+                            <h6 class="p2">Desde Aministrador puedes editar videojuegos, desde modificarlos hasta subir nuevos videojuegos</h6>
+                            <h6 class="p2">Para editar un videojuego solo busca el videojuego en las multiples categorias y da clic en editar para modificar sus caracteristicas o hasta eliminar el videojuego</h6>
+                            <h6 class="p2">Para subir un videojuego solo da clic en la pestaña subir videojuego y llena los campos necesarios para subir el videojuego</h6>
+                        </div>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <!-- TERMINA SECCION A EDITAR -->
                     </div>
                 </div>
@@ -89,23 +111,6 @@
                 </div>
             </div>
         </footer>
-
-        <!-- Script que inicia el Slider de las 3 imagenes principales -->
-        <script type="text/javascript"> Cufon.now(); </script>
-        <script type="text/javascript">
-            $(window).load(function() {
-		$('.slider')._TMS({
-                    duration:1000,
-                    easing:'easeOutQuint',
-                    preset:'slideDown',
-                    slideshow:3000,
-                    banners:false,
-                    pauseOnHover:true,
-                    pagination:true,
-                    pagNums:false
-                });
-            });
-        </script>
         
     </body>
 </html>

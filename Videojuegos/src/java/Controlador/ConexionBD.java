@@ -25,7 +25,7 @@ public class ConexionBD{
         ResultSet rs1, rs2;
 
     public ConexionBD(){
-        url = "jdbc:postgresql://localhost:5432/Iglu";
+        url = "jdbc:postgresql:backupIglu.backup";
         username = "postgres";
         password = "89631139";
         conexion = null;

@@ -37,7 +37,7 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="index.html">Categorias</a></li>
+                                <li><a href="#">Categorias</a></li>
                                 <li><a href="index.html">Solicitudes</a></li>
                                 <li><a href="index.html">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
