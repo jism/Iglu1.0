@@ -58,7 +58,47 @@ public class ConexionBD{
                 }
         }
     }
+        
+        public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, byte[] video, byte[] imagen, String url){
+            ConexionBD p = new ConexionBD();
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+                    System.out.println("Conexion Exitosa");
+                    p.sentencia = p.conexion.createStatement();
+                    
+                    String idvj="1";
+                    String v=p.openFileToString(video);
+                    String i=p.openFileToString(imagen);
+                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"')");
+                    //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
+                    p.sentencia.close();
+                }catch (SQLException e){
+                    System.out.println("Error "+e);
+                }catch (Exception e){
+                    System.out.println("Error "+e);
+                }finally{
+                    if(p.conexion != null){
+                        try{
+                            p.conexion.close();
+                        }catch(SQLException e){
+                            System.out.println("Error "+e);
+                        }
+                    }
+                }
+            }
 
+        public String openFileToString(byte[] _bytes)
+{
+    String file_string = "";
+
+    for(int i = 0; i < _bytes.length; i++)
+    {
+        file_string += (char)_bytes[i];
+    }
+
+    return file_string;    
+}
     
     public static void main(String[] args) {
         ConexionBD p = new ConexionBD();
