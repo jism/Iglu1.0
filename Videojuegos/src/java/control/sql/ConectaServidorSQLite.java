@@ -34,6 +34,7 @@ public class ConectaServidorSQLite extends ConectaServidor{
     }
     
     public static void main(String[] pps){
+        /*
         ConectaServidorSQLite sqlite = new ConectaServidorSQLite();
         try {
             sqlite.conectar();
@@ -48,5 +49,6 @@ public class ConectaServidorSQLite extends ConectaServidor{
         } catch (SQLException ex) {
             Logger.getLogger(ConectaServidorSQLite.class.getName()).log(Level.SEVERE, null, ex);
         }
+                */
     }
 }
