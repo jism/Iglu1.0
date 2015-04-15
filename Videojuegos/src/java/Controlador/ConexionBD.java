@@ -10,7 +10,9 @@ package Controlador;
  *
  * @author Ivan
  */
+import Modelo.Estudiante;
 import java.sql.*;
+import java.util.LinkedList;
 /**
  *
  * @author ivan
@@ -97,29 +99,69 @@ public class ConexionBD{
         file_string += (char)_bytes[i];
     }
 
-    return file_string;    
+    return file_string;
 }
+    
+    public LinkedList solicitudes(){
+        LinkedList<Estudiante> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From estudiante");
+                Estudiante e;
+                
+                while(rs1.next()){
+                    e=new Estudiante(rs1.getString("nombre"), rs1.getString("appat"), rs1.getString("apmat"), rs1.getString("correoe"), rs1.getString("universidad"), rs1.getString("nocuenta"));
+                    lista.add(e);
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+    }
     
     public static void main(String[] args) {
         ConexionBD p = new ConexionBD();
       try{
+    
         Class.forName("org.postgresql.Driver");
         p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
         System.out.println("Conexion Exitosa");
         p.sentencia = p.conexion.createStatement();
-        
+    /*    
         //Ejemplo consulta
         //p.sentencia.executeUpdate("insert into estudiante (correoe) values('");
         p.rs1 = p.sentencia.executeQuery("Select * From estudiante");
-        p.registrarse("ivan", "s", "m", "iv@ciencias", "unam", "3");
+        //p.registrarse("ivan", "s", "m", "iv@ciencias", "unam", "3");
             while(p.rs1.next()){
                 System.out.println(p.rs1.getString("correoe")+" - "+ p.rs1.getString("nombre"));
             }
-            System.out.println("\n");
+            System.out.println("\n\n\n");
             p.rs1.close();
+  */
+        LinkedList<Estudiante> lista = p.solicitudes();
+        for(int i=0; i<lista.size(); i++){
+            System.out.println(lista.get(i).getNombre() + " 1");
+        }
         
-    }catch (SQLException e){
-            System.out.println("Error "+e);
+    //}catch (SQLException e){
+      //      System.out.println("Error "+e);
     }catch (Exception e){
             System.out.println("Error "+e);
     }finally{
