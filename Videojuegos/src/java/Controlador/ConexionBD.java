@@ -11,6 +11,7 @@ package Controlador;
  * @author Ivan
  */
 import Modelo.Estudiante;
+import Modelo.Videojuego;
 import java.sql.*;
 import java.util.LinkedList;
 /**
@@ -27,7 +28,7 @@ public class ConexionBD{
     public ConexionBD(){
         url = "jdbc:postgresql://localhost:5432/Iglu";
         username = "postgres";
-        password = "89631139";
+        password = "contrapass";
         conexion = null;
         sentencia=null;
         st = null;
@@ -72,7 +73,7 @@ public class ConexionBD{
                     String idvj="1";
                     String v=p.openFileToString(video);
                     String i=p.openFileToString(imagen);
-                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"')");
+                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"')");
                     //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
                     p.sentencia.close();
                 }catch (SQLException e){
@@ -117,6 +118,40 @@ public class ConexionBD{
                 while(rs1.next()){
                     e=new Estudiante(rs1.getString("nombre"), rs1.getString("appat"), rs1.getString("apmat"), rs1.getString("correoe"), rs1.getString("universidad"), rs1.getString("nocuenta"));
                     lista.add(e);
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+    }
+    
+    public LinkedList videojuegos(){
+        LinkedList<Videojuego> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From videojuego");
+                Videojuego v;
+                
+                while(rs1.next()){
+                    v=new Videojuego(Integer.parseInt(rs1.getString("idvj")), rs1.getString("nombre"), Integer.parseInt(rs1.getString("año")), rs1.getString("descripcion"), rs1.getString("categoria"), rs1.getString("desarrollador"), Integer.parseInt(rs1.getString("costo")), rs1.getString("video"));
+                    lista.add(v);
                 }
                 rs1.close();
                 

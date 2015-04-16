@@ -4,6 +4,9 @@
     Author     : JesúsIván
 --%>
 
+<%@page import="Modelo.Videojuego"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -171,6 +174,30 @@
             
         </table>    
                 </font> 
+                
+                <table style="width:100%">
+                        <%
+                            try{
+                                LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
+                                
+                                for(int i=0; i<lista.size(); i++){
+                        %>
+                            <tr>
+                                <td><% out.print(lista.get(i).getNombre()); %></td>
+                                <td><% out.print(lista.get(i).getCosto()); %></td>
+                                <td><% out.print(lista.get(i).getAnio()); %></td>
+                                <td>
+                                    <form action="#">
+                                        <input type="submit" value="Historial Academico">
+                                    </form><br>
+                                </td>
+                            </tr>
+                            <% 
+                                }
+                            }catch(java.lang.NullPointerException e){
+                            }
+                            %>
+                        </table>    
                 </div>
             </div>
         </div>
