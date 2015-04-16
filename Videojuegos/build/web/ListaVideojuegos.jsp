@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Videojuegos Iglu</title>
+    <title>Lista de videojuegos</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -46,42 +46,130 @@
         </div>
        
         <div class="row-bot">
-        	<div class="row-bot-bg">
+            <div class="row-bot-bg">
             	<div class="main">
         
                 <font color="white">
-                    <table style="width:100%" color="white">
-                        <tr>
-                            <td>Mario Bros</td>
-                            <td>Nintendo</td> 
-                            <td>$0</td>
-                            <td>
-                                <form action="Descargado.jsp">
-                                    <input type="submit" value="Descargar">
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Candy Crush</td>
-                            <td>Ring</td> 
-                            <td>$0</td>
-                            <td>
-                                <form action="Descargado.jsp">
-                                    <input type="submit" value="Descargar">
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Plantas vs Zombies</td>
-                            <td>Cop Cap</td> 
-                            <td>$20</td>
-                            <td>
-                                <form action="Descargado.jsp">
-                                    <input type="submit" value="Descargar">
-                                </form>
-                            </td>
-                        </tr>
-                    </table>    
+                <table style="width:100%" style="border: 1px white">
+                    <tr>
+                        <td>
+                            Metal gear rising  
+                        </td>
+                        <td> 
+                            <img src="images/mgrr.jpg" WIDTH=100 HEIGHT=80 />
+                        </td>
+                        <td>
+                            Descripcion
+                        </td>
+                        <td>
+                            Precio : $10.00 
+                        </td>
+                        <td>
+                            <input type="button" onclick=" location.href='verVideo.jsp' " name="BotonVerVideo1" value="Ver video" > 
+                        </td>
+                        <td>
+                            <form action="Descargado.jsp">
+                            <input type="submit" value="Descargar">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            God of war 3 
+                        </td>
+                        <td> 
+                    <img src="images/gow3.jpg" WIDTH=100 HEIGHT=80 />
+                </td>
+                <td>
+                   Descripcion
+                </td>
+                <td>
+                   Precio : $10.00 
+                </td>
+                <td>
+                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
+                </td>
+                <td>
+                    <form action="Descargado.jsp">
+                        <input type="submit" value="Descargar">
+                    </form>
+                </td>    
+            </tr>
+            
+            
+            <tr>
+                <td>
+                   The king of figthers XIII  
+                </td>
+                <td> 
+                    <img src="images/kof.jpg" WIDTH=100 HEIGHT=80 />
+                </td>
+                <td>
+                   Descripcion
+                </td>
+                <td>
+                   Precio : $10.00 
+                </td>
+                <td>
+                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
+                </td>
+                <td>
+                    <form action="Descargado.jsp">
+                        <input type="submit" value="Descargar">
+                    </form>
+                </td>    
+            </tr>
+            <tr>
+                <td>New super mario bros.
+   
+                </td>
+                <td>
+                    <img src="images/mariobros.jpg" WIDTH=100 HEIGHT=80 />
+                </td>
+                <td>
+                   Descripcion
+                </td>
+                <td>
+                   Precio : $10.00 
+                </td>
+                <td>
+                    <input type="button" name="BotonVerVideo2" value="Ver video" > 
+                </td>
+                <td>
+                    <form action="Descargado.jsp">
+                        <input type="submit" value="Descargar">
+                    </form>
+                </td>
+                
+            </tr>
+            <tr>
+                <td>Assassins Creed 1
+   
+                </td>
+                <td>
+                    <img src="images/assassins.jpg" WIDTH=100 HEIGHT=80 />
+                </td>
+                <td>
+                   Descripcion
+                </td>
+                <td>
+                   Precio : $10.00 
+                </td>
+                <td>
+                    <input type="button" name="BotonVerVideo3" value="Ver video" > 
+                </td>
+                <td>
+                    <form action="Descargado.jsp">
+                        <input type="submit" value="Descargar">
+                    </form>
+                </td>
+                
+            </tr>            
+            
+            
+            
+            
+        </table>    
                 </font> 
                 </div>
             </div>

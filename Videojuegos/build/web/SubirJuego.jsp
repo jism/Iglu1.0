@@ -29,14 +29,14 @@
         	<div class="main">
                     <div class="wrapper">
                         <!-- Encabezado de pagina que manda a la pagina principal -->
-                        <h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
+                        <h1><a href="Administrador">VideojuegosIglu<span>.com</span></a></h1>
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="index.html">Categorias</a></li>
-                                <li><a href="index.html">Contacto</a></li>
-                                <li><a href="index.html">Registrarse</a></li>
-                                <li><a href="Administrador.jsp">Iniciar Sesion</a></li>
+                                <li><a href="#">Categorias</a></li>
+                                <li><a href="Solicitudes">Solicitudes</a></li>
+                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
+                                <li><a href="index.html">Cerrar Sesion</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -47,44 +47,24 @@
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
-                    <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->    
-                    
- 		    <!-- Links a inicio de Sesi贸n, y registro. guardados en Html pero no usados.
-
-
-			   <p align=center><a href="login.jsp">Iniciar sesi贸n</a>
-			     &nbsp;&nbsp;&nbsp;
-			     <a href="Registro.html">Registrarse</a> 
-			     -->
-		    <font color="black">
-					</br>
-					<font size="7"> Subir Videojuego</font></p>
-					</br>
-					
-					
-					<form action="Upload" method="post">
-					  <p>Nombre de Juego: <input type="text" name="nombre"></p>
-					  <p>Desarrollador: <input type="text" name="email"></p>
-					  <p>Descripci贸n: <input type="text" name="email"></p>
-					  <p>Categoria: <input type="text" name="correo"></p>
-					  <p>Clasificaci贸n: <input type="text" name="email"></p>
-					  <p>Fecha de Lanzamiento: <input type="text" name="email"></p>
-					  
-					  <input type="file" name="file"/> 
-					  <br /> 
-					  <input type="submit" value="Subir Juego" /> 
-					  <br />
-					  
-					  <br />
-					  <input type="file" name="file"/> 
- 					  <br />
-					  <input type="submit" value="Subir Imagen de juego" /> 
-					  <br />
-					  
-					  <br />
-					  <p><input type="submit" value="Registrar"></p>
-		    </form></font>
-                    
+                        
+                            <h3>Subir Videojuego</h3><br>
+                                <form action="Register" method="post">
+                                    <article class="column-2">
+					  <pre>      Nombre:                   <input type="text" name="nombre"></pre>
+					  <pre>      Desarrollador:           <input type="text" name="desarrollador"></pre>
+					  <pre>      A駉 Lanzamiento:     <input type="text" name="ano"></pre>
+					  <pre>      Categoria:                <input type="text" name="categoria"></pre>
+					  <pre>      Precio:                    <input type="text" name="precio"></pre>
+                                          <pre>      Descripcion:              <textarea COLS=21 ROWS=5 NAME="descripcion"></textarea></pre>
+                                    </article>
+                                    <article class="column-2">
+                                          <pre>Imagen:        <input type="file" name="imagen"/><br /></pre><br>
+                                          <pre>Video:          <input type="file" name="video"/><br /></pre><br>
+					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
+                                          <input type="submit" class="button-2" value="Subir Videojuego">
+                                    </article>
+                                </form>
                     <!-- TERMINA SECCION A EDITAR -->
                     </div>
                 </div>
@@ -106,18 +86,6 @@
                 	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
                     </article>
                 </div>
-                
-                <!-- Informacion acerca de la pagina respecto a los creditos que se otorgan a estudiantes-->
-                <div class="wrapper">
-                    <article class="column-2">
-                	<div class="maxheight indent-bot">
-                            <h3 class="p1">Bienvenidos Estudiantes</h3>
-                            <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempe帽o academico que te serviran para comprar los mejores videojuegos</h6>
-                            <p class="p2">Solo tienes que dar clic en <a href="index.html" target="_blank">Registrarse</a>  llenar tus datos y sube tu historial academico </p>
-                            <p class="p2">Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</p>
-                        </div>
-                    </article>
-                </div>
             </div>
         </section>
     
@@ -132,22 +100,5 @@
             </div>
         </footer>
 
-        <!-- Script que inicia el Slider de las 3 imagenes principales -->
-        <script type="text/javascript"> Cufon.now(); </script>
-        <script type="text/javascript">
-            $(window).load(function() {
-		$('.slider')._TMS({
-                    duration:1000,
-                    easing:'easeOutQuint',
-                    preset:'slideDown',
-                    slideshow:3000,
-                    banners:false,
-                    pauseOnHover:true,
-                    pagination:true,
-                    pagNums:false
-                });
-            });
-        </script>
-        
     </body>
 </html>

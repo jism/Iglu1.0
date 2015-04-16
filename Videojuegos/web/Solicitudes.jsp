@@ -4,6 +4,9 @@
     Author     : JesúsIván
 --%>
 
+<%@page import="java.util.LinkedList"%>
+<%@page import="Modelo.Estudiante"%>
+<%@page import="Modelo.Estudiante"%>
 <html lang="en">
 
     <head>  
@@ -37,7 +40,7 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="index.html">Categorias</a></li>
+                                <li><a href="#">Categorias</a></li>
                                 <li><a href="index.html">Solicitudes</a></li>
                                 <li><a href="index.html">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
@@ -53,37 +56,26 @@
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
                         <br>  
-                        <table style="width:100%" color="white">
+                        <table style="width:100%">
+                        <%
+                            try{
+                                LinkedList<Estudiante> lista=(LinkedList) request.getAttribute("lista");
+                                
+                                for(int i=0; i<lista.size(); i++){
+                        %>
                             <tr>
-                                <td>Leonardo Ayala</td>
-                                <td>301122334</td> 
-                                <td>UNAM</td>
+                                <td><% out.print(lista.get(i).getCorreoe()); %></td>
                                 <td>
                                     <form action="#">
                                         <input type="submit" value="Historial Academico">
                                     </form><br>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Uriel Quezada</td>
-                                <td>300099887</td> 
-                                <td>UNAM</td>
-                                <td>
-                                    <form action="#">
-                                        <input type="submit" value="Historial Academico">
-                                    </form><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gibram Abud</td>
-                                <td>307755664</td> 
-                                <td>UNAM</td>
-                                <td>
-                                    <form action="#">
-                                        <input type="submit" value="Historial Academico">
-                                    </form><br>
-                                </td>
-                            </tr>
+                            <% 
+                                }
+                            }catch(java.lang.NullPointerException e){
+                            }
+                            %>
                         </table>    
                     <!-- TERMINA SECCION A EDITAR -->
                     </div>
@@ -120,22 +112,5 @@
             </div>
         </footer>
 
-        <!-- Script que inicia el Slider de las 3 imagenes principales -->
-        <script type="text/javascript"> Cufon.now(); </script>
-        <script type="text/javascript">
-            $(window).load(function() {
-		$('.slider')._TMS({
-                    duration:1000,
-                    easing:'easeOutQuint',
-                    preset:'slideDown',
-                    slideshow:3000,
-                    banners:false,
-                    pauseOnHover:true,
-                    pagination:true,
-                    pagNums:false
-                });
-            });
-        </script>
-        
     </body>
 </html>

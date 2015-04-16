@@ -45,6 +45,8 @@ p {margin-bottom:18px;}
 .p4 {margin-bottom:40px;}
 .p5 {margin-bottom:50px;}
 
+pre {margin-bottom:18px; font: 100% sans-serif;}
+
 .reg {text-transform:uppercase;}
 
 .fleft {float:left;}
@@ -150,7 +152,7 @@ h2 {
 }
 .row-bot-bg {
 	width:100%;
-	min-height:122px;
+	min-height:430px;
 	background:url(../images/row-bot-bg.jpg) center top no-repeat;
 }
 
@@ -212,7 +214,8 @@ h3 {
 	margin-bottom:5px;
 }
 h5 {margin-bottom:2px;}
-h6 {color:#769e02;}
+h6 {color:#fff;}
+h7 {color:#000; font: 100% sans-serif;}
 
 .border-bot {
 	width:100%; 
@@ -246,6 +249,10 @@ h6 {color:#769e02;}
 	cursor:pointer;
 }
 .button-2:hover {background:#B40404;}
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 .list-1 li {
 	line-height:18px; 
@@ -268,7 +275,13 @@ h6 {color:#769e02;}
 .list-2 span {float:right; text-align:right; width:auto; font-weight:normal;}
 .list-2 dt span {font-weight:bold;}
 
+<<<<<<< HEAD
 td{color: #fff}
+=======
+td{color: #000}
+
+form{color: #000}
+>>>>>>> master
 
 .price-list li {
 	overflow: hidden; 
