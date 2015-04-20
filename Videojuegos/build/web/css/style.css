@@ -249,10 +249,7 @@ h7 {color:#000; font: 100% sans-serif;}
 	cursor:pointer;
 }
 .button-2:hover {background:#B40404;}
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 
 .list-1 li {
 	line-height:18px; 
@@ -275,13 +272,9 @@ h7 {color:#000; font: 100% sans-serif;}
 .list-2 span {float:right; text-align:right; width:auto; font-weight:normal;}
 .list-2 dt span {font-weight:bold;}
 
-<<<<<<< HEAD
-td{color: #fff}
-=======
 td{color: #000}
 
 form{color: #000}
->>>>>>> master
 
 .price-list li {
 	overflow: hidden; 
