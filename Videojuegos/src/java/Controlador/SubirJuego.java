@@ -5,23 +5,20 @@
  */
 package Controlador;
 
-import Modelo.Estudiante;
-import Modelo.Videojuego;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author r
+ * @author Ivan
  */
-public class ListaVideojuego extends HttpServlet {
+@WebServlet(name = "SubirJuego", urlPatterns = {"/SubirJuego"})
+public class SubirJuego extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class ListaVideojuego extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListaVideojuego</title>");            
+            out.println("<title>Servlet SubirJuego</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListaVideojuego at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubirJuego at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,30 +58,7 @@ public class ListaVideojuego extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        ConexionBD p = new ConexionBD();
-          try{
-            Class.forName("org.postgresql.Driver");
-            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
-            System.out.println("Conexion Exitosa");
-            p.sentencia = p.conexion.createStatement();
-             
-                
-                
-        LinkedList<Videojuego> lista = p.videojuegos();
-        request.setAttribute("lista", lista);
-
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getArchivo());
-        }
-        
-        request.getRequestDispatcher("/ListaVideojuegos.jsp").forward(request, response);
-        
-        }catch (SQLException e){
-                System.out.println("Error "+e);
-            }catch (Exception e){
-                System.out.println("Error "+e);
-            } 
+        processRequest(request, response);
     }
 
     /**
@@ -98,7 +72,29 @@ public class ListaVideojuego extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String nombre = request.getParameter("nombre");
+        String desarrollador = request.getParameter("desarrollador");
+        String ano = request.getParameter("ano");
+        String categoria = request.getParameter("categoria");
+        String precio = request.getParameter("precio");
+        String descripcion = request.getParameter("descripcion");
+        String video = request.getParameter("video");
+        String archivo = request.getParameter("archivo");
+        
+        
+        if(nombre.equals("") || desarrollador.equals("") || ano.equals("") || categoria.equals("") || precio.equals("") || descripcion.equals("") || video.equals("") | archivo.equals("") ){
+            String f="f";
+            request.setAttribute("msg", f);
+            request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
+        }else{
+            ConexionBD cbd=new ConexionBD();
+            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, null, archivo);
+            
+            String t="t";
+            request.setAttribute("msg", t);
+            request.getRequestDispatcher("/index.html").forward(request, response);
+        }
     }
 
     /**

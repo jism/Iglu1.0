@@ -111,7 +111,7 @@ public class ConexionBD{
         }
     }
         
-        public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, byte[] video, byte[] imagen, String url){
+        public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, String video, byte[] imagen, String url){
             ConexionBD p = new ConexionBD();
                 try{
                     Class.forName("org.postgresql.Driver");
@@ -119,10 +119,21 @@ public class ConexionBD{
                     System.out.println("Conexion Exitosa");
                     p.sentencia = p.conexion.createStatement();
                     
-                    String idvj="1";
-                    String v=p.openFileToString(video);
-                    String i=p.openFileToString(imagen);
-                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"')");
+                    int id=0;
+                    p.rs1=p.sentencia.executeQuery("select * from videojuego");
+                    try{
+                        while(p.rs1.next()){
+                            id++;
+                        }
+                    }catch(java.lang.NullPointerException e){
+                        id=0;
+                    }
+                    
+                    String idvj=Integer.toString(id);
+                    System.out.println(id);
+                    //String v=p.openFileToString(video);
+                    //String i=p.openFileToString(imagen);
+                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, archivo, video) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+url+"', '"+video+"')");
                     //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
                     p.sentencia.close();
                 }catch (SQLException e){
@@ -214,7 +225,7 @@ public class ConexionBD{
                 Videojuego v;
                 
                 while(rs1.next()){
-                    v=new Videojuego(Integer.parseInt(rs1.getString("idvj")), rs1.getString("nombre"), Integer.parseInt(rs1.getString("año")), rs1.getString("descripcion"), rs1.getString("categoria"), rs1.getString("desarrollador"), Integer.parseInt(rs1.getString("costo")), rs1.getString("video"));
+                    v=new Videojuego(Integer.parseInt(rs1.getString("idvj")), rs1.getString("nombre"), Integer.parseInt(rs1.getString("año")), rs1.getString("descripcion"), rs1.getString("categoria"), rs1.getString("desarrollador"), Integer.parseInt(rs1.getString("costo")), rs1.getString("archivo"));
                     lista.add(v);
                 }
                 rs1.close();
@@ -250,7 +261,9 @@ public class ConexionBD{
             System.out.println("\n\n\n");
             p.rs1.close();
   */
-        p.cuenta("diego@ciencias.unam.mx", "20");
+        //p.cuenta("diego@ciencias.unam.mx", "20");
+          p.subirVideojuego("Mario Bros", "1989", "Clasico juego de Super Mario Bros", "NES", "10", "Clasicos", "https://www.youtube.com/watch?v=Boq3ghiTKHA", null, "http://download.freeroms.com/nes_roms/08/super_mario_bros._(usajapan).zip");
+            
         
     //}catch (SQLException e){
       //      System.out.println("Error "+e);
