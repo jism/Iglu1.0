@@ -49,7 +49,7 @@
                     <div class="main">
                         
                             <h3>Subir Videojuego</h3><br>
-                                <form action="Register" method="post">
+                                <form action="SubirJuego" method="post">
                                     <article class="column-2">
 					  <pre>      Nombre:                   <input type="text" name="nombre"></pre>
 					  <pre>      Desarrollador:           <input type="text" name="desarrollador"></pre>
@@ -59,10 +59,16 @@
                                           <pre>      Descripcion:              <textarea COLS=21 ROWS=5 NAME="descripcion"></textarea></pre>
                                     </article>
                                     <article class="column-2">
+                                        <!--
                                           <pre>Imagen:        <input type="file" name="imagen"/><br /></pre><br>
                                           <pre>Video:          <input type="file" name="video"/><br /></pre><br>
 					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
                                           <input type="submit" class="button-2" value="Subir Videojuego">
+                                          -->
+                                          <pre>Imagen:        <input type="text" name="imagen"></pre><br>
+                                          <pre>Video:          <input type="text" name="video"></pre><br>
+					  <pre>Videojuego:   <input type="text" name="archivo"></pre><br>
+                                          <input type="submit" class="button-2">
                                     </article>
                                 </form>
                     <!-- TERMINA SECCION A EDITAR -->

@@ -176,21 +176,24 @@
                 </font> 
                 
                 <table style="width:100%">
+                    <script> 
+                        function ejecutaCodigo(){
+                            
+                        } 
+                    </script> 
                         <%
                             try{
                                 LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
                                 
                                 for(int i=0; i<lista.size(); i++){
+                                    System.out.println("Link: "+lista.get(i).getArchivo());
                         %>
                             <tr>
                                 <td><% out.print(lista.get(i).getNombre()); %></td>
                                 <td><% out.print(lista.get(i).getCosto()); %></td>
-                                <td><% out.print(lista.get(i).getAnio()); %></td>
-                                <td>
-                                    <form action="#">
-                                        <input type="submit" value="Historial Academico">
-                                    </form><br>
-                                </td>
+                                <td><% out.print(lista.get(i).getAnio());%></td>
+                                <td><form action="google.com"><input type="submit" value="Descargar"></form></td>
+                                <td><input onclick="window.open('<%lista.get(i).getArchivo();%>' , 'Archivo' , 'width=800, height=600, scrollbars=no')" type="button" value="Descarga" /> </td>
                             </tr>
                             <% 
                                 }
