@@ -3,7 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/r/Documentos/repositorio-IS4.0/Iglu1.0/Videojuegos/web/ListaVideojuegos.jsp</file>
+=======
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/Creditos.java</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/css/style.css</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/ListaVideojuegos.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/Registro.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/index.html</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/css/layout.css</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/RevisarSolicitudCredito.java</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/Solicitudes.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/Administrador.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/SubirJuego.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/ConexionBD.java</file>
+>>>>>>> 12c2273f8da23f53300b10e0bd00e3ca0b6e89bf
         </group>
     </open-files>
 </project-private>

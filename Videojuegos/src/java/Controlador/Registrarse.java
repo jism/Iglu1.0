@@ -82,9 +82,17 @@ public class Registrarse extends HttpServlet {
         String universidad = request.getParameter("universidad");
         String cuenta = request.getParameter("cuenta");
         
-        ConexionBD cbd=new ConexionBD();
-        cbd.registrarse(nombre, appat, apmat, correoe, universidad, cuenta);
-        response.sendRedirect("index.html");
+        if(nombre.equals("") || appat.equals("") || apmat.equals("") || correoe.equals("") || universidad.equals("") || cuenta.equals("") ){
+            String f="f";
+            request.setAttribute("msg", f);
+            request.getRequestDispatcher("/Registro.jsp").forward(request, response);
+        }else{
+            ConexionBD cbd=new ConexionBD();
+            cbd.registrarse(nombre, appat, apmat, correoe, universidad, cuenta);
+            String t="t";
+            request.setAttribute("msg", t);
+            request.getRequestDispatcher("/Registro.jsp").forward(request, response);
+        }
         
         
     }
