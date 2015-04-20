@@ -47,9 +47,22 @@
                 <div class="row-bot-bg">
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
-                    
+
                         <article class="column-2">
                         <h3>Registro</h3>
+                        
+                        <%  String msg=(String) request.getAttribute("msg");
+                          try{  
+                           if(msg.equals(null))
+                               msg="a";
+                          }catch(java.lang.NullPointerException e){
+                              msg="a";
+                          }
+                            if(msg.equals("t")){
+                                %><h6 class="p2">Estudiante Registrado</h6>
+                                  <h6 class="p2">Tu solicitud sera revisada y se te informara por correo electronico el proceso de tu solicitud</h6>
+                                  <a class="button-2" href="index.html">Regresar</a>
+                            <%}else{%>
                         <form action="Registrarse" method="post">
                             <pre>Nombre:                   <input type="text" name="nombre"></pre>
                             <pre>Apellido Paterno:      <input type="text" name="appat"></pre>
@@ -58,8 +71,12 @@
                             <pre>Universidad:             <input type="text" name="universidad"></pre>
                             <pre>Numero de cuenta:    <input type="text" name="cuenta"></pre>
                             <pre>Historial Academico:  <input type="file" name="archivo"/><br /></pre>
+                            <%if(msg.equals("f")){
+                                %><h6 class="p2">Favor de llenar todos los campos</h6>
+                            <%}%>
                             <input type="submit" class="button-2" value="Registrarse">
                         </form>
+                            <%}%>
                        </article>
                     
                         <article class="column-2">

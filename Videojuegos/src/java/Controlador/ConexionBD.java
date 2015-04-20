@@ -13,6 +13,7 @@ package Controlador;
 import Modelo.Estudiante;
 import Modelo.Videojuego;
 import java.sql.*;
+import java.text.DateFormat;
 import java.util.LinkedList;
 /**
  *
@@ -28,13 +29,61 @@ public class ConexionBD{
     public ConexionBD(){
         url = "jdbc:postgresql://localhost:5432/Iglu";
         username = "postgres";
-        password = "contrapass";
+        password = "89631139";
         conexion = null;
         sentencia=null;
         st = null;
         rs1=null;
         rs2 = null;
         
+    }
+    
+    public void cuenta(String correoe, String creditos){
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+            
+            try{
+                p.rs2 = sentencia.executeQuery("Select * From cuenta");
+                while(p.rs2.next()){
+                    if(!p.rs2.getString("correoe").equals(correoe)){
+                        int i=0;
+                        p.rs1=p.sentencia.executeQuery("select * from cuenta");
+                        try{
+                            while(p.rs1.next()){
+                                i++;
+                            }
+                        }catch(java.lang.NullPointerException e){
+                            i=0;
+                        }
+                        Date date = new Date(31, 12, 2015);
+                        String fecha=date.toString();
+                        String id=Integer.toString(i);
+                        p.sentencia.executeUpdate("insert into cuenta(idcuenta, fechavenc, creditos, correoe) values('"+id+"', '"+fecha+"', '"+creditos+"', '"+correoe+"')");
+            
+                    }
+                }
+            }catch(java.lang.NullPointerException npe){
+                    
+            }
+            p.sentencia.close();
+            
+        }catch (SQLException e){
+            System.out.println("Error "+e);
+        }catch (Exception e){
+            System.out.println("Error "+e);
+        }finally{
+            if(p.conexion != null){
+                try{
+                    p.conexion.close();
+                }catch(SQLException e){
+                    System.out.println("Error "+e);
+                }
+                }
+        }
     }
     
     public void registrarse(String nombre, String appat, String apmat, String correoe, String universidad, String cuenta){
@@ -115,9 +164,24 @@ public class ConexionBD{
                 rs1 = sentencia.executeQuery("Select * From estudiante");
                 Estudiante e;
                 
+                try{
                 while(rs1.next()){
                     e=new Estudiante(rs1.getString("nombre"), rs1.getString("appat"), rs1.getString("apmat"), rs1.getString("correoe"), rs1.getString("universidad"), rs1.getString("nocuenta"));
                     lista.add(e);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                try{
+                rs1 = sentencia.executeQuery("Select * From cuenta");
+                while(rs1.next()){
+                    for(int i=0; i< lista.size(); i++){
+                        if(rs1.getString("correoe").equals(lista.get(i).getCorreoe()))
+                            lista.remove(i);
+                    }
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
                 }
                 rs1.close();
                 
@@ -174,11 +238,7 @@ public class ConexionBD{
     public static void main(String[] args) {
         ConexionBD p = new ConexionBD();
       try{
-    
-        Class.forName("org.postgresql.Driver");
-        p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
-        System.out.println("Conexion Exitosa");
-        p.sentencia = p.conexion.createStatement();
+
     /*    
         //Ejemplo consulta
         //p.sentencia.executeUpdate("insert into estudiante (correoe) values('");
@@ -190,10 +250,7 @@ public class ConexionBD{
             System.out.println("\n\n\n");
             p.rs1.close();
   */
-        LinkedList<Estudiante> lista = p.solicitudes();
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getNombre() + " 1");
-        }
+        p.cuenta("diego@ciencias.unam.mx", "20");
         
     //}catch (SQLException e){
       //      System.out.println("Error "+e);

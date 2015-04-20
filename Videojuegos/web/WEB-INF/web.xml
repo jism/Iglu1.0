@@ -4,9 +4,17 @@
         <servlet-name>ListaVideojuego</servlet-name>
         <servlet-class>Controlador.ListaVideojuego</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Creditos</servlet-name>
+        <servlet-class>Controlador.Creditos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListaVideojuego</servlet-name>
         <url-pattern>/ListaVideojuego</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Creditos</servlet-name>
+        <url-pattern>/Creditos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

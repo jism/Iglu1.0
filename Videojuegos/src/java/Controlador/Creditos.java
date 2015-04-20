@@ -5,23 +5,18 @@
  */
 package Controlador;
 
-import Modelo.Estudiante;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
-import java.util.LinkedList;
 
 /**
  *
  * @author Ivan
  */
-@WebServlet(name = "RevisarSolicitudCredito", urlPatterns = {"/RevisarSolicitudCredito"})
-public class RevisarSolicitudCredito extends HttpServlet {
+public class Creditos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +35,10 @@ public class RevisarSolicitudCredito extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RevisarSolicitudCredito</title>");            
+            out.println("<title>Servlet Creditos</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RevisarSolicitudCredito at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Creditos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,28 +56,7 @@ public class RevisarSolicitudCredito extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        ConexionBD p = new ConexionBD();
-          try{
-            Class.forName("org.postgresql.Driver");
-            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
-            System.out.println("Conexion Exitosa");
-            p.sentencia = p.conexion.createStatement();
-            
-        LinkedList<Estudiante> lista = p.solicitudes();
-        request.setAttribute("lista", lista);
-        
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getCorreoe());
-        }
-        
-        request.getRequestDispatcher("/Solicitudes.jsp").forward(request, response);
-        
-        }catch (SQLException e){
-                System.out.println("Error "+e);
-            }catch (Exception e){
-                System.out.println("Error "+e);
-            }  
+        processRequest(request, response);
     }
 
     /**
@@ -97,27 +71,15 @@ public class RevisarSolicitudCredito extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        ConexionBD p = new ConexionBD();
-          try{
-            Class.forName("org.postgresql.Driver");
-            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
-            System.out.println("Conexion Exitosa");
-            p.sentencia = p.conexion.createStatement();
-            
-        LinkedList<Estudiante> lista = p.solicitudes();
-        request.setAttribute("lista", lista);
-        
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getCorreoe());
+        String creditos = request.getParameter("creditos");
+        String correoe = request.getParameter("correoe");
+         if(creditos.equals("") || correoe.equals("")){
+            request.getRequestDispatcher("RevisarSolicitudCredito").forward(request, response);
+        }else{
+            ConexionBD cbd=new ConexionBD();
+            cbd.cuenta(correoe, creditos);
+            request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
         }
-        
-        request.getRequestDispatcher("/Solicitudes.jsp").forward(request, response);
-        
-        }catch (SQLException e){
-                System.out.println("Error "+e);
-            }catch (Exception e){
-                System.out.println("Error "+e);
-            }  
     }
 
     /**

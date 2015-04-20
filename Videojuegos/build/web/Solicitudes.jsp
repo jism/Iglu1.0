@@ -40,9 +40,9 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="#">Categorias</a></li>
-                                <li><a href="index.html">Solicitudes</a></li>
-                                <li><a href="index.html">Subir Videojuego</a></li>
+                                <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                                <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
+                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
                             </ul>
                         </nav>
@@ -55,28 +55,38 @@
                 <div class="row-bot-bg">
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
-                        <br>  
+                        <br>
+                      <article class="column-4">
+                          <form action="Creditos" method="post">
+                            <h6 class="p2">Indica el correo electronico y la cantidad de creditos que deseas otorgar al estudiante</h6>
+                            <td><h6 class="p2">Correo Electronico <input type="text" name="correoe"></td>
+                            <td>Creditos: <input type="text" name="creditos"></td>
+                            <td><input type="submit" value="Asignar"></td></h6>
+                          </form><br>
                         <table style="width:100%">
                         <%
                             try{
                                 LinkedList<Estudiante> lista=(LinkedList) request.getAttribute("lista");
                                 
+                                if(lista.size()==0){
+                                    %><h6 class="p2"><%out.println("No hay solicitudes pendientes");}%></h6><%
                                 for(int i=0; i<lista.size(); i++){
+                                    String nombre=lista.get(i).getNombre()+" "+lista.get(i).getAppat()+" "+lista.get(i).getApmat();
                         %>
                             <tr>
+                                <td><% out.print(nombre); %></td>
                                 <td><% out.print(lista.get(i).getCorreoe()); %></td>
-                                <td>
-                                    <form action="#">
-                                        <input type="submit" value="Historial Academico">
-                                    </form><br>
-                                </td>
+                                <td><% out.print(lista.get(i).getUniversidad()); %></td>
+                                <td><% out.print(lista.get(i).getCuenta()); %></td>
+                                <td><form action="index.html" method="post"><input type="submit" value="Ver Historial"></form></td>
                             </tr>
                             <% 
                                 }
                             }catch(java.lang.NullPointerException e){
                             }
                             %>
-                        </table>    
+                        </table>
+                      </article>
                     <!-- TERMINA SECCION A EDITAR -->
                     </div>
                 </div>

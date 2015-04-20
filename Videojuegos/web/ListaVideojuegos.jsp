@@ -38,10 +38,10 @@
                 	<h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
                     <nav>
                         <ul class="menu">
-                            <li><a href="ListaVideojuegos.jsp">Lista Videojuegos</a></li>
-                            <li><a href="index.html">Contacto</a></li>
-                            <li><a href="index.html">Registrarse</a></li>
-                            <li><a href="index.html">Iniciar Sesion</a></li>
+                            <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                                <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
+                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
+                                <li><a href="index.html">Cerrar Sesion</a></li>
                         </ul>
                     </nav>
                 </div>
