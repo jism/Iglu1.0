@@ -53,20 +53,21 @@
             	<div class="main">
         
                 <font color="white">
-                <table style="width:100%" style="border: 1px white">
-                    <tr>
-                        <td>
-                            Metal gear rising  
-                        </td>
-                        <td> 
-                            <img src="images/mgrr.jpg" WIDTH=100 HEIGHT=80 />
-                        </td>
-                        <td>
-                            Descripcion
-                        </td>
-                        <td>
-                            Precio : $10.00 
-                        </td>
+                    
+                
+                
+                <table style="width:100%">
+                        <%
+                        try{
+                            LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
+                                
+                            for(int i=0; i<lista.size(); i++){
+                        %>
+                        <tr style="border-color: white">
+                        <td><% out.print(lista.get(i).getNombre()); %></td>
+                        <td>imagen</td>
+                        <td>Año: <% out.print(lista.get(i).getAnio()); %></td>                       
+                        <td>Precio: $<% out.print(lista.get(i).getCosto()); %></td>
                         <td>
                             <input type="button" onclick=" location.href='verVideo.jsp' " name="BotonVerVideo1" value="Ver video" > 
                         </td>
@@ -75,129 +76,15 @@
                             <input type="submit" value="Descargar">
                             </form>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            God of war 3 
-                        </td>
-                        <td> 
-                    <img src="images/gow3.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>    
-            </tr>
-            
-            
-            <tr>
-                <td>
-                   The king of figthers XIII  
-                </td>
-                <td> 
-                    <img src="images/kof.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>    
-            </tr>
-            <tr>
-                <td>New super mario bros.
-   
-                </td>
-                <td>
-                    <img src="images/mariobros.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo2" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>
-                
-            </tr>
-            <tr>
-                <td>Assassins Creed 1
-   
-                </td>
-                <td>
-                    <img src="images/assassins.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo3" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>
-                
-            </tr>            
-            
-            
-            
-            
-        </table>    
-                </font> 
-                
-                <table style="width:100%">
-                        <%
-                            try{
-                                LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
-                                
-                                for(int i=0; i<lista.size(); i++){
-                        %>
-                            <tr>
-                                <td><% out.print(lista.get(i).getNombre()); %></td>
-                                <td><% out.print(lista.get(i).getCosto()); %></td>
-                                <td><% out.print(lista.get(i).getAnio()); %></td>
-                                <td>
-                                    <form action="#">
-                                        <input type="submit" value="Historial Academico">
-                                    </form><br>
-                                </td>
-                            </tr>
+                        
+                        </tr>
                             <% 
                                 }
                             }catch(java.lang.NullPointerException e){
                             }
                             %>
-                        </table>    
+                        </table>  
+                        </font> 
                 </div>
             </div>
         </div>
