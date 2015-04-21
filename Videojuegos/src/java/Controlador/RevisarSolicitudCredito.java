@@ -72,10 +72,6 @@ public class RevisarSolicitudCredito extends HttpServlet {
         LinkedList<Estudiante> lista = p.solicitudes();
         request.setAttribute("lista", lista);
         
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getCorreoe());
-        }
-        
         request.getRequestDispatcher("/Solicitudes.jsp").forward(request, response);
         
         }catch (SQLException e){
@@ -106,11 +102,7 @@ public class RevisarSolicitudCredito extends HttpServlet {
             
         LinkedList<Estudiante> lista = p.solicitudes();
         request.setAttribute("lista", lista);
-        
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getCorreoe());
-        }
-        
+
         request.getRequestDispatcher("/Solicitudes.jsp").forward(request, response);
         
         }catch (SQLException e){

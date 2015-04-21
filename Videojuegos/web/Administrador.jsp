@@ -39,7 +39,7 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                                <li><a href="ListaVideojuego">Categorias</a></li>
                                 <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
                                 <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>

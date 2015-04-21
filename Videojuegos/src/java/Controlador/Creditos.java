@@ -7,6 +7,7 @@ package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,15 @@ public class Creditos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String creditos = request.getParameter("creditos");
+        String correoe = request.getParameter("correoe");
+         if(creditos.equals("") || correoe.equals("")){
+            request.getRequestDispatcher("RevisarSolicitudCredito").forward(request, response);
+        }else{
+            ConexionBD cbd=new ConexionBD();
+            cbd.cuenta(correoe, creditos);
+            request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+        }
     }
 
     /**
@@ -77,9 +86,19 @@ public class Creditos extends HttpServlet {
             request.getRequestDispatcher("RevisarSolicitudCredito").forward(request, response);
         }else{
             ConexionBD cbd=new ConexionBD();
+            try{
+            Class.forName("org.postgresql.Driver");
+            cbd.conexion =DriverManager.getConnection(cbd.url, cbd.username, cbd.password);
+            System.out.println("Conexion Exitosa");
+            cbd.sentencia = cbd.conexion.createStatement();
             cbd.cuenta(correoe, creditos);
             request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+        }catch (SQLException e){
+            System.out.println("Error "+e);
+        }catch (Exception e){
+            System.out.println("Error "+e);
         }
+    }
     }
 
     /**

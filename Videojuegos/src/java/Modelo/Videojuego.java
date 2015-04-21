@@ -19,8 +19,17 @@ public class Videojuego {
     String desarrollador;
     int costo;
     String archivo;
+    String video;
 
-    public Videojuego(int idvj, String nombre, int anio, String descripcion, String categoria, String desarrollador, int costo, String archivo) {
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public Videojuego(int idvj, String nombre, int anio, String descripcion, String categoria, String desarrollador, int costo, String archivo, String video) {
         this.idvj = idvj;
         this.nombre = nombre;
         this.anio = anio;
@@ -29,6 +38,7 @@ public class Videojuego {
         this.desarrollador = desarrollador;
         this.costo = costo;
         this.archivo = archivo;
+        this.video=video;
     }
 
     public int getIdvj() {

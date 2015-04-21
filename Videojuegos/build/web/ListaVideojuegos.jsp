@@ -13,7 +13,6 @@
     <head>
     <title>Lista de videojuegos</title>
     <meta charset="utf-8">
-
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen"> 
@@ -38,7 +37,7 @@
                 	<h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
                     <nav>
                         <ul class="menu">
-                            <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                            <li><a href="ListaVideojuego">Categorias</a></li>
                                 <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
                                 <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
@@ -51,156 +50,27 @@
         <div class="row-bot">
             <div class="row-bot-bg">
             	<div class="main">
-        
-                <font color="white">
-                    
-                
-                
-                <table style="width:100%">
-                        <%
-                        try{
-                            LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
-                                
-                            for(int i=0; i<lista.size(); i++){
-                        %>
-                        <tr style="border-color: white">
-                        <td><% out.print(lista.get(i).getNombre()); %></td>
-                        <td>imagen</td>
-                        <td>Año: <% out.print(lista.get(i).getAnio()); %></td>                       
-                        <td>Precio: $<% out.print(lista.get(i).getCosto()); %></td>
-                        <td>
-                            <input type="button" onclick=" location.href='verVideo.jsp' " name="BotonVerVideo1" value="Ver video" > 
-                        </td>
-                        <td>
-                            <form action="Descargado.jsp">
-                            <input type="submit" value="Descargar">
-                            </form>
-                        </td>
-<<<<<<< HEAD
-                        
-                        </tr>
-=======
-                    </tr>
-                    <tr>
-                        <td>
-                            God of war 3 
-                        </td>
-                        <td> 
-                    <img src="images/gow3.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>    
-            </tr>
-            
-            
-            <tr>
-                <td>
-                   The king of figthers XIII  
-                </td>
-                <td> 
-                    <img src="images/kof.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo1" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>    
-            </tr>
-            <tr>
-                <td>New super mario bros.
-   
-                </td>
-                <td>
-                    <img src="images/mariobros.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo2" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>
-                
-            </tr>
-            <tr>
-                <td>Assassins Creed 1
-   
-                </td>
-                <td>
-                    <img src="images/assassins.jpg" WIDTH=100 HEIGHT=80 />
-                </td>
-                <td>
-                   Descripcion
-                </td>
-                <td>
-                   Precio : $10.00 
-                </td>
-                <td>
-                    <input type="button" name="BotonVerVideo3" value="Ver video" > 
-                </td>
-                <td>
-                    <form action="Descargado.jsp">
-                        <input type="submit" value="Descargar">
-                    </form>
-                </td>
-                
-            </tr>            
-            
-            
-            
-            
-        </table>    
-                </font> 
-                
-                <table style="width:100%">
-                    <script> 
-                        function ejecutaCodigo(){
-                            
-                        } 
-                    </script> 
+                    <h3 class="p2">Lista de Videojuegos</h3>
+                    <table style="width:100%">
                         <%
                             try{
                                 LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
                                 
+                                if(lista.size()==0){
+                                    %><h6 class="p2"><%out.println("Lista de Videojuegos vacia");%></h6><%
+                                }
+                                
                                 for(int i=0; i<lista.size(); i++){
-                                    System.out.println("Link: "+lista.get(i).getArchivo());
                         %>
                             <tr>
                                 <td><% out.print(lista.get(i).getNombre()); %></td>
-                                <td><% out.print(lista.get(i).getCosto()); %></td>
-                                <td><% out.print(lista.get(i).getAnio());%></td>
-                                <td><form action="google.com"><input type="submit" value="Descargar"></form></td>
-                                <td><input onclick="window.open('<%lista.get(i).getArchivo();%>' , 'Archivo' , 'width=800, height=600, scrollbars=no')" type="button" value="Descarga" /> </td>
+                                <td><% out.print(lista.get(i).getAnio()); %></td>                       
+                                <td>$<% out.print(lista.get(i).getCosto()); %></td>
+                                <td><% out.print(lista.get(i).getCategoria()); %></td>
+                                <td><% out.print(lista.get(i).getDesarrollador()); %></td>
+                                <td>Video <a title="Ver video" href="javascript:void(0);" onclick="window.open('<%out.print(lista.get(i).getVideo());%>'+'&autoplay=1', 'popup', 'left=390, top=200, width=425, height=344, toolbar=0, resizable=1')"><img src="http://www.hopechiro.com/wp-content/uploads/2013/03/icon-Play.png" title="Ver video" /></a></td>
+                                <td><input type="button" onclick=" location.href='<%out.print(lista.get(i).getArchivo());%>' " name="descarga" value="Descarga" ></td>
                             </tr>
->>>>>>> JesusSaavedraPractica1
                             <% 
                                 }
                             }catch(java.lang.NullPointerException e){
@@ -226,17 +96,6 @@
                 	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
                 </article>
             </div>
-
-            <div class="wrapper">
-                <article class="column-2">
-                	<div class="maxheight indent-bot">
-                        <h3 class="p1">Bienvenidos Estudiantes</h3>
-                        <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempeÃ±o academico que te serviran para comprar los mejores videojuegos</h6>
-                        <p class="p2">Solo tienes que dar clic en <a href="index.html" target="_blank">Registrarse</a>  llenar tus datos y sube tu historial academico </p>
-                        Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.
-                    </div>
-                </article>
-            </div>
         </div>
     </section>
     
@@ -248,21 +107,5 @@
             </div>
         </div>
     </footer>
-
-    <script type="text/javascript"> Cufon.now(); </script>
-    <script type="text/javascript">
-		$(window).load(function() {
-			$('.slider')._TMS({
-				duration:1000,
-				easing:'easeOutQuint',
-				preset:'slideDown',
-				slideshow:7000,
-				banners:false,
-				pauseOnHover:true,
-				pagination:true,
-				pagNums:false
-			});
-		});
-    </script>
 </body>
 </html>

@@ -45,26 +45,33 @@ public class ConexionBD{
             p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
             System.out.println("Conexion Exitosa");
             p.sentencia = p.conexion.createStatement();
+            boolean bandera=true;
             
             try{
                 p.rs2 = sentencia.executeQuery("Select * From cuenta");
+                try{
                 while(p.rs2.next()){
-                    if(!p.rs2.getString("correoe").equals(correoe)){
-                        int i=0;
+                    if(p.rs2.getString("correoe").equals(correoe)){
+                       bandera=false; 
+                    }
+                }
+                }catch(java.lang.NullPointerException e){
+                    System.out.println("Vacio");
+                }
+                if(bandera){
+                int i=0;
                         p.rs1=p.sentencia.executeQuery("select * from cuenta");
                         try{
                             while(p.rs1.next()){
                                 i++;
                             }
                         }catch(java.lang.NullPointerException e){
-                            i=0;
                         }
                         Date date = new Date(31, 12, 2015);
                         String fecha=date.toString();
+                        System.out.println("date "+date);
                         String id=Integer.toString(i);
                         p.sentencia.executeUpdate("insert into cuenta(idcuenta, fechavenc, creditos, correoe) values('"+id+"', '"+fecha+"', '"+creditos+"', '"+correoe+"')");
-            
-                    }
                 }
             }catch(java.lang.NullPointerException npe){
                     
@@ -225,7 +232,7 @@ public class ConexionBD{
                 Videojuego v;
                 
                 while(rs1.next()){
-                    v=new Videojuego(Integer.parseInt(rs1.getString("idvj")), rs1.getString("nombre"), Integer.parseInt(rs1.getString("año")), rs1.getString("descripcion"), rs1.getString("categoria"), rs1.getString("desarrollador"), Integer.parseInt(rs1.getString("costo")), rs1.getString("archivo"));
+                    v=new Videojuego(Integer.parseInt(rs1.getString("idvj")), rs1.getString("nombre"), Integer.parseInt(rs1.getString("año")), rs1.getString("descripcion"), rs1.getString("categoria"), rs1.getString("desarrollador"), Integer.parseInt(rs1.getString("costo")), rs1.getString("archivo"), rs1.getString("video"));
                     lista.add(v);
                 }
                 rs1.close();
@@ -249,7 +256,10 @@ public class ConexionBD{
     public static void main(String[] args) {
         ConexionBD p = new ConexionBD();
       try{
-
+Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
     /*    
         //Ejemplo consulta
         //p.sentencia.executeUpdate("insert into estudiante (correoe) values('");
@@ -261,8 +271,8 @@ public class ConexionBD{
             System.out.println("\n\n\n");
             p.rs1.close();
   */
-        //p.cuenta("diego@ciencias.unam.mx", "20");
-          p.subirVideojuego("Mario Bros", "1989", "Clasico juego de Super Mario Bros", "NES", "10", "Clasicos", "https://www.youtube.com/watch?v=Boq3ghiTKHA", null, "http://download.freeroms.com/nes_roms/08/super_mario_bros._(usajapan).zip");
+        p.cuenta("diego@ciencias.unam.mx", "20");
+         // p.subirVideojuego("Mario Bros", "1989", "Clasico juego de Super Mario Bros", "NES", "10", "Clasicos", "https://www.youtube.com/watch?v=Boq3ghiTKHA", null, "http://download.freeroms.com/nes_roms/08/super_mario_bros._(usajapan).zip");
             
         
     //}catch (SQLException e){

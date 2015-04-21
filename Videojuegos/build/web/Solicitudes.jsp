@@ -40,7 +40,7 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                                <li><a href="ListaVideojuego">Categorias</a></li>
                                 <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
                                 <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
@@ -78,7 +78,7 @@
                                 <td><% out.print(lista.get(i).getCorreoe()); %></td>
                                 <td><% out.print(lista.get(i).getUniversidad()); %></td>
                                 <td><% out.print(lista.get(i).getCuenta()); %></td>
-                                <td><form action="index.html" method="post"><input type="submit" value="Ver Historial"></form></td>
+                                <td><form action="#" method="post"><input type="submit" value="Ver Historial"></form><br></td>
                             </tr>
                             <% 
                                 }

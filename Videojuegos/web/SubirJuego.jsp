@@ -33,7 +33,7 @@
                         <nav>
                             <!-- Opciones del menu principal en el encabezado -->
                             <ul class="menu">
-                                <li><a href="ListaVideojuegos.jsp">Categorias</a></li>
+                                <li><a href="ListaVideojuego">Categorias</a></li>
                                 <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
                                 <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
                                 <li><a href="index.html">Cerrar Sesion</a></li>
@@ -65,10 +65,21 @@
 					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
                                           <input type="submit" class="button-2" value="Subir Videojuego">
                                           -->
-                                          <pre>Imagen:        <input type="text" name="imagen"></pre><br>
+                                          <!--<pre>Imagen:        <input type="text" name="imagen"></pre><br>-->
                                           <pre>Video:          <input type="text" name="video"></pre><br>
 					  <pre>Videojuego:   <input type="text" name="archivo"></pre><br>
-                                          <input type="submit" class="button-2">
+                                          <input type="submit" class="button-2" value="Guardar">
+                                          
+                                          <%  String msg=(String) request.getAttribute("msg");
+                          try{  
+                           if(msg.equals(null))
+                               msg="a";
+                          }catch(java.lang.NullPointerException e){
+                              msg="a";
+                          }
+                            if(msg.equals("t")){
+                                %><h6 class="p2">Videojuego Guardado Exitosamente</h6>
+                            <%}%>
                                     </article>
                                 </form>
                     <!-- TERMINA SECCION A EDITAR -->

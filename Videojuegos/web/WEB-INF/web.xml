@@ -8,6 +8,10 @@
         <servlet-name>Creditos</servlet-name>
         <servlet-class>Controlador.Creditos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Descarga</servlet-name>
+        <servlet-class>Controlador.Descarga</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListaVideojuego</servlet-name>
         <url-pattern>/ListaVideojuego</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>Creditos</servlet-name>
         <url-pattern>/Creditos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Descarga</servlet-name>
+        <url-pattern>/Descarga</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

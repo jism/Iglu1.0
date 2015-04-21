@@ -93,7 +93,7 @@ public class SubirJuego extends HttpServlet {
             
             String t="t";
             request.setAttribute("msg", t);
-            request.getRequestDispatcher("/index.html").forward(request, response);
+            request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
         }
     }
 
