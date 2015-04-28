@@ -65,7 +65,7 @@
 					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
                                           <input type="submit" class="button-2" value="Subir Videojuego">
                                           -->
-                                          <!--<pre>Imagen:        <input type="text" name="imagen"></pre><br>-->
+                                          <pre>Imagen:        <input type="file" name="imagen"/></pre><br>
                                           <pre>Video:          <input type="text" name="video"></pre><br>
 					  <pre>Videojuego:   <input type="text" name="archivo"></pre><br>
                                           <input type="submit" class="button-2" value="Guardar">

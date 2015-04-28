@@ -5,8 +5,12 @@
  */
 package Controlador;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,7 +85,12 @@ public class SubirJuego extends HttpServlet {
         String descripcion = request.getParameter("descripcion");
         String video = request.getParameter("video");
         String archivo = request.getParameter("archivo");
+        File img = new File(request.getParameter("imagen"));
+        Image image = ImageIO.read(img);
+        BufferedImage bi = (BufferedImage) image;
         
+        Imagen imagen=new Imagen();
+        byte[] array=imagen.generaImagen(bi);
         
         if(nombre.equals("") || desarrollador.equals("") || ano.equals("") || categoria.equals("") || precio.equals("") || descripcion.equals("") || video.equals("") | archivo.equals("") ){
             String f="f";
@@ -89,7 +98,7 @@ public class SubirJuego extends HttpServlet {
             request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
         }else{
             ConexionBD cbd=new ConexionBD();
-            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, null, archivo);
+            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, array, archivo);
             
             String t="t";
             request.setAttribute("msg", t);

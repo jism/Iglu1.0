@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/ListaVideojuegos.jsp</file>
-            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/Solicitudes.jsp</file>
-            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/verVideo.jsp</file>
             <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/web/SubirJuego.jsp</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/Imagen.java</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/ConexionBD.java</file>
+            <file>file:/C:/Users/JesúsIván/Desktop/6to/Iglu1.0/Videojuegos/src/java/Controlador/SubirJuego.java</file>
         </group>
     </open-files>
 </project-private>
