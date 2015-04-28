@@ -57,12 +57,8 @@
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
                         <br>
                       <article class="column-4">
-                          <form action="Creditos" method="post">
-                            <h6 class="p2">Indica el correo electronico y la cantidad de creditos que deseas otorgar al estudiante</h6>
-                            <td><h6 class="p2">Correo Electronico <input type="text" name="correoe"></td>
-                            <td>Creditos: <input type="text" name="creditos"></td>
-                            <td><input type="submit" value="Asignar"></td></h6>
-                          </form><br>
+                            <h6 class="p2">Lista de Solicitudes de Creditos</h6>
+                            
                         <table style="width:100%">
                         <%
                             try{
@@ -79,6 +75,10 @@
                                 <td><% out.print(lista.get(i).getUniversidad()); %></td>
                                 <td><% out.print(lista.get(i).getCuenta()); %></td>
                                 <td><form action="#" method="post"><input type="submit" value="Ver Historial"></form><br></td>
+                                <form action="Creditos" method="post">
+                                    <td><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>">Creditos: <textarea COLS=6 ROWS=1 NAME="creditos"></textarea></td>
+                                    <td><input type="submit" value="Asignar"></td>
+                                </form>
                             </tr>
                             <% 
                                 }

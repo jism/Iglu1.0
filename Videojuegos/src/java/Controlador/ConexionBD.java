@@ -140,7 +140,7 @@ public class ConexionBD{
                     System.out.println(id);
                     //String v=p.openFileToString(video);
                     //String i=p.openFileToString(imagen);
-                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, archivo, video) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+url+"', '"+video+"')");
+                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, archivo, video, imagen) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+url+"', '"+video+"', "+imagen+")");
                     //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
                     p.sentencia.close();
                 }catch (SQLException e){
