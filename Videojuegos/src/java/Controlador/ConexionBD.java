@@ -11,6 +11,7 @@ package Controlador;
  * @author Ivan
  */
 import Modelo.Estudiante;
+import Modelo.Usuario;
 import Modelo.Videojuego;
 import java.sql.*;
 import java.text.DateFormat;
@@ -38,7 +39,8 @@ public class ConexionBD{
         
     }
     
-    public void cuenta(String correoe, String creditos){
+    public boolean cuenta(String correoe, String creditos){
+        boolean b=false;
         ConexionBD p = new ConexionBD();
           try{
             Class.forName("org.postgresql.Driver");
@@ -59,20 +61,10 @@ public class ConexionBD{
                     System.out.println("Vacio");
                 }
                 if(bandera){
-                int i=0;
-                        p.rs1=p.sentencia.executeQuery("select * from cuenta");
-                        try{
-                            while(p.rs1.next()){
-                                i++;
-                            }
-                        }catch(java.lang.NullPointerException e){
-                        }
-                        Date date = new Date(31, 12, 2015);
-                        String fecha=date.toString();
-                        System.out.println("date "+date);
-                        String id=Integer.toString(i);
-                        p.sentencia.executeUpdate("insert into cuenta(idcuenta, fechavenc, creditos, correoe) values('"+id+"', '"+fecha+"', '"+creditos+"', '"+correoe+"')");
-                }
+                    p.sentencia.executeUpdate("insert into cuenta(fechavenc, creditos, correoe) values('2015-12-31', '"+creditos+"', '"+correoe+"')");
+                    b=true;
+                }else
+                    b=false;
             }catch(java.lang.NullPointerException npe){
                     
             }
@@ -91,6 +83,166 @@ public class ConexionBD{
                 }
                 }
         }
+          return b;
+    }
+    
+    public boolean cambiaContrasena(String correoe, String contrasena){
+        boolean b=false;
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+            boolean bandera=true;
+            
+            try{
+                sentencia.executeUpdate("update usuario set contrasena = '"+contrasena+"' where correoe = '"+correoe+"'");
+                b=true;
+            }catch(java.lang.NullPointerException npe){
+                    
+            }
+            p.sentencia.close();
+            
+        }catch (SQLException e){
+            System.out.println("Error "+e);
+        }catch (Exception e){
+            System.out.println("Error "+e);
+        }finally{
+            if(p.conexion != null){
+                try{
+                    p.conexion.close();
+                }catch(SQLException e){
+                    System.out.println("Error "+e);
+                }
+                }
+        }
+          return b;
+    }
+    
+    public LinkedList getCuenta(){
+        LinkedList<Modelo.Cuenta> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From cuenta");
+                Modelo.Cuenta c;
+                
+                try{
+                while(rs1.next()){
+                    c=new Modelo.Cuenta(rs1.getString("correoe"), Integer.parseInt(rs1.getString("creditos")), rs1.getString("fechavenc"));
+                    
+                    lista.add(c);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+        }
+    
+    public LinkedList datosUsuarios(){
+        LinkedList<Usuario> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("select nombre ||' '|| appat ||' '|| apmat AS \"nombrecompleto\", correoe, creditos from estudiante natural join cuenta");
+                Usuario u;
+                
+                try{
+                while(rs1.next()){
+                    u=new Usuario(rs1.getString("correoe"), rs1.getString("creditos"), (String) rs1.getString("nombrecompleto"));
+                    lista.add(u);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+        }
+    
+    public boolean usuario(String correoe, String contrasena){
+        boolean b=false;
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+            boolean bandera=true;
+            
+            try{
+                p.rs2 = sentencia.executeQuery("Select * From usuario");
+                try{
+                while(p.rs2.next()){
+                    if(p.rs2.getString("correoe").equals(correoe)){
+                       bandera=false; 
+                    }
+                }
+                }catch(java.lang.NullPointerException e){
+                    System.out.println("Vacio");
+                }
+                if(bandera){
+                    p.sentencia.executeUpdate("insert into usuario(correoe, contrasena) values('"+correoe+"', '"+contrasena+"')");
+                    b=true;
+                }else
+                    b=false;
+            }catch(java.lang.NullPointerException npe){
+                    
+            }
+            p.sentencia.close();
+            
+        }catch (SQLException e){
+            System.out.println("Error "+e);
+        }catch (Exception e){
+            System.out.println("Error "+e);
+        }finally{
+            if(p.conexion != null){
+                try{
+                    p.conexion.close();
+                    return b;
+                }catch(SQLException e){
+                    System.out.println("Error "+e);
+                }
+                }
+        }
+        return b;
     }
     
     public void registrarse(String nombre, String appat, String apmat, String correoe, String universidad, String cuenta){
@@ -118,7 +270,7 @@ public class ConexionBD{
         }
     }
         
-        public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, String video, byte[] imagen, String url){
+        public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, String video, String ruta, String url){
             ConexionBD p = new ConexionBD();
                 try{
                     Class.forName("org.postgresql.Driver");
@@ -140,7 +292,7 @@ public class ConexionBD{
                     System.out.println(id);
                     //String v=p.openFileToString(video);
                     //String i=p.openFileToString(imagen);
-                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, archivo, video, imagen) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+url+"', '"+video+"', "+imagen+")");
+                    p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, archivo, video, imagen) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+url+"', '"+video+"', "+ruta+")");
                     //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
                     p.sentencia.close();
                 }catch (SQLException e){
@@ -169,6 +321,44 @@ public class ConexionBD{
 
     return file_string;
 }
+        
+    public LinkedList estudiantes(){
+        LinkedList<Estudiante> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From estudiante");
+                Estudiante e;
+                
+                try{
+                while(rs1.next()){
+                    e=new Estudiante(rs1.getString("nombre"), rs1.getString("appat"), rs1.getString("apmat"), rs1.getString("correoe"), rs1.getString("universidad"), rs1.getString("nocuenta"));
+                    lista.add(e);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+        }
     
     public LinkedList solicitudes(){
         LinkedList<Estudiante> lista=new LinkedList();
@@ -217,7 +407,120 @@ public class ConexionBD{
                 }
                 return lista;
             }
-    }
+        }
+    
+    public LinkedList usuarios(){
+        LinkedList<Usuario> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From usuario");
+                Usuario u;
+                
+                try{
+                while(rs1.next()){
+                    u=new Usuario(rs1.getString("correoe"), rs1.getString("contrasena"));
+                    lista.add(u);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+        }
+    
+    public LinkedList correos(){
+        LinkedList<Estudiante> lista=new LinkedList();
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From estudiante");
+                Estudiante e;
+                
+                try{
+                while(rs1.next()){
+                    e=new Estudiante(rs1.getString("nombre"), rs1.getString("appat"), rs1.getString("apmat"), rs1.getString("correoe"), rs1.getString("universidad"), rs1.getString("nocuenta"));
+                    lista.add(e);
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return lista;
+                }
+                rs1.close();
+                
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return lista;
+            }
+        }
+    
+    public String[] getAdministrador(){
+        String[] datos=new String[2];
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+                rs1 = sentencia.executeQuery("Select * From administrador");
+                
+                try{
+                while(rs1.next()){
+                        datos[0]=rs1.getString("correoe");
+                        datos[1]=rs1.getString("nombre");
+                        break;
+                }
+                }catch(java.lang.NullPointerException npe){
+                    return null;
+                }
+                rs1.close();
+            }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }finally{
+                if(p.conexion != null){
+                    try{
+                        p.conexion.close();
+                    }catch(SQLException e){
+                        System.out.println("Error "+e);
+                    }
+                }
+                return datos;
+            }
+        }
     
     public LinkedList videojuegos(){
         LinkedList<Videojuego> lista=new LinkedList();
@@ -271,7 +574,7 @@ Class.forName("org.postgresql.Driver");
             System.out.println("\n\n\n");
             p.rs1.close();
   */
-        p.cuenta("diego@ciencias.unam.mx", "20");
+        //p.cuenta("diego@ciencias.unam.mx", "20");
          // p.subirVideojuego("Mario Bros", "1989", "Clasico juego de Super Mario Bros", "NES", "10", "Clasicos", "https://www.youtube.com/watch?v=Boq3ghiTKHA", null, "http://download.freeroms.com/nes_roms/08/super_mario_bros._(usajapan).zip");
             
         

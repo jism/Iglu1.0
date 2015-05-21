@@ -7,10 +7,14 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="Modelo.Estudiante"%>
 <%@page import="Modelo.Estudiante"%>
-<html lang="en">
-
+<html>
+    <%if(session.getAttribute("administrador") == null){
+        response.sendRedirect("Index.jsp");
+    }else if(session.getAttribute("administrador").equals("iglu20151@gmail.com")){
+                                
+    %>
     <head>  
-    <title>Videojuegos Iglu</title>
+    <title>Solicitudes</title>
     <meta charset="utf-8">
     
     <!-- 
@@ -33,20 +37,15 @@
         <header>
             <!-- Encabezado de la pagina. Seccion de la pagina con fondo negro-->
             <div class="row-top">
-        	<div class="main">
-                    <div class="wrapper">
-                        <!-- Encabezado de pagina que manda a la pagina principal -->
-                        <h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
-                        <nav>
-                            <!-- Opciones del menu principal en el encabezado -->
-                            <ul class="menu">
-                                <li><a href="ListaVideojuego">Categorias</a></li>
-                                <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
-                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
-                                <li><a href="index.html">Cerrar Sesion</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                <div class="main">
+                    <ul id="nav">
+                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
+                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                        <div id="lavalamp"></div>
+                    </ul>
                 </div>
             </div>
             
@@ -55,17 +54,24 @@
                 <div class="row-bot-bg">
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
-                        <br>
                       <article class="column-4">
-                            <h6 class="p2">Lista de Solicitudes de Creditos</h6>
-                            
+                          <h3 class="p1">Lista de Solicitudes de Credito Pendientes</h3>
                         <table style="width:100%">
                         <%
                             try{
                                 LinkedList<Estudiante> lista=(LinkedList) request.getAttribute("lista");
-                                
                                 if(lista.size()==0){
-                                    %><h6 class="p2"><%out.println("No hay solicitudes pendientes");}%></h6><%
+                                    %><h6 class="p2"><%out.println("No hay solicitudes pendientes");%></h6><%}else{%>
+                            <tr>
+                                <td><font color="#eee">Nombre</font></td>
+                                <td><font color="#eee">Correo Electrónico</font></td>
+                                <td><font color="#eee">Universidad</font></td>
+                                <td><font color="#eee">Cuenta</font></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                                    <%
                                 for(int i=0; i<lista.size(); i++){
                                     String nombre=lista.get(i).getNombre()+" "+lista.get(i).getAppat()+" "+lista.get(i).getApmat();
                         %>
@@ -74,13 +80,54 @@
                                 <td><% out.print(lista.get(i).getCorreoe()); %></td>
                                 <td><% out.print(lista.get(i).getUniversidad()); %></td>
                                 <td><% out.print(lista.get(i).getCuenta()); %></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
                                 <td><form action="#" method="post"><input type="submit" value="Ver Historial"></form><br></td>
                                 <form action="Creditos" method="post">
-                                    <td><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>">Creditos: <textarea COLS=6 ROWS=1 NAME="creditos"></textarea></td>
+                                    <td>
+    <div class="multiselect">
+        <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+                <option>Select an option</option>
+            </select>
+            <div class="overSelect"></div>
+        </div>
+        <div id="checkboxes">
+            <label for="one"><input type="checkbox" name="valido" value="1"/>Datos Validos</label>
+            <label for="two"><input type="checkbox" name="invalido" value="Nombre Incorrecto"/>Nombre Incorrecto</label>
+            <label for="three"><input type="checkbox" name="invalido" value="Universidad Incorrecta"/>Universidad Incorrecta</label>
+            <label for="four"><input type="checkbox" name="invalido" value="Cuenta Incorrecta"/>Cuenta Incorrecta</label>
+            <label for="five"><input type="checkbox" name="invalido" value="Archivo Incorrecto"/>Archivo Incorrecto</label>
+        </div>
+    </div>
+                                        
+<script>
+    var expanded = false;
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+</script>
+                                    </td>
+                                    <td><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>">Créditos: <input type="text" size="4" pattern="[0-9]{1,6}$" NAME="creditos" required></textarea></td>
                                     <td><input type="submit" value="Asignar"></td>
+                                    
                                 </form>
                             </tr>
-                            <% 
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <%      }
                                 }
                             }catch(java.lang.NullPointerException e){
                             }
@@ -92,35 +139,19 @@
                 </div>
             </div>
         </header>
-    
-        <!-- Seccion de la pagina con fondo blanco-->
-        <section id="content"><div class="ic"></div>
-            <div class="main">
-                <!-- 3 imagenes secundarias (los juegos o categorias mas importantes o descargadas) -->
-                <div class="wrapper img-indent-bot">
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-1.jpg" alt=""></a>
-                    </article>
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-2.jpg" alt=""></a>
-                    </article>
-                    <article class="col-2">
-                	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
-                    </article>
-                </div>
-            </div>
-        </section>
-    
+
         <!-- Pie de pagina. Seccion de la pagina con fondo negro -->
         <!-- informacion acerca de Iglu -->
         <footer>
             <div class="main">
         	<div class="aligncenter">
                     <span>Iglu &copy; 2015</span>
-                    <a rel="nofollow" class="link" target="_blank" href="index.html">Videojuegos Iglu</a> by VideojuegosIglu.com
+                    <a rel="nofollow" class="link" target="_blank" href="Index.jsp">Videojuegos Iglu</a> by iglu20151@gmail.com
                 </div>
             </div>
         </footer>
-
+        <%}else{
+            response.sendRedirect("Index.jsp");
+        }%>
     </body>
 </html>

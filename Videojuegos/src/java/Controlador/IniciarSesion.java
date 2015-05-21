@@ -6,13 +6,18 @@ package Controlador;
  * and open the template in the editor.
  */
 
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,7 +67,7 @@ public class IniciarSesion extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         //omite la verificacion de la contraseña
-        response.sendRedirect("Administrador.jsp");
+        //response.sendRedirect("Administrador.jsp");
     }
 
     /**
@@ -76,7 +81,48 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        HttpSession sesion = request.getSession();
+        String correoe=request.getParameter("correo");
+        String contrasena=request.getParameter("contrasena");
+        Encriptar en=new Encriptar();
+        contrasena=en.encriptaEnMD5(contrasena);
+        ConexionBD p=new ConexionBD();
+        try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+            
+        String[] datos = p.getAdministrador();
+        if(datos[0].equals(correoe) && datos[1].equals(contrasena)){
+            sesion.setAttribute("administrador", correoe);
+            response.sendRedirect("Administrador.jsp");
+        }else{
+            LinkedList<Usuario> usuarios=p.usuarios();
+            for(int i=0; i<usuarios.size(); i++){
+                if(usuarios.get(i).getCorreoe().equals(correoe)){
+                    if(usuarios.get(i).getContrasena().equals(contrasena)){
+                        sesion.setAttribute("usuario", correoe);
+                        i=usuarios.size();
+                        response.sendRedirect("Index.jsp");
+                    }else{
+                        String t="contrasena";
+                        request.setAttribute("msg", t);
+                        request.getRequestDispatcher("/Index.jsp").forward(request, response);
+                        i=usuarios.size();
+                    }
+                }
+            }
+            String t="correo";
+            request.setAttribute("msg", t);
+            request.getRequestDispatcher("/Index.jsp").forward(request, response);
+        }
+        }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+        } 
     }
 
     /**

@@ -26,19 +26,65 @@
         <header>
             <!-- Encabezado de la pagina. Seccion de la pagina con fondo negro-->
             <div class="row-top">
-        	<div class="main">
-                    <div class="wrapper">
-                        <!-- Encabezado de pagina que manda a la pagina principal -->
-                        <h1><a href="index.html">VideojuegosIglu<span>.com</span></a></h1>
-                        <nav>
-                            <!-- Opciones del menu principal en el encabezado -->
-                            <ul class="menu">
-                                <li><a href="ListaVideojuego">Categorias</a></li>
-                                <li><a href="Registro.jsp">Registrarse</a></li>
-                                <li><a href="IniciarSesion">Iniciar Sesion</a></li>
+                <div class="main">
+                    <ul id="nav">
+                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <%if(session.getAttribute("administrador") != null){
+                                if(session.getAttribute("administrador").equals("iglu20151@gmail.com")){
+                                    response.sendRedirect("Administrador.jsp");
+                                }
+                            }else if(session.getAttribute("usuario") == null){
+                            %>
+                        <li><a class="hsubs">Iniciar Sesión</a>
+                            <ul class="subs">
+                              <form action="IniciarSesion" method="post">
+                                <li><a><input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" size="19" placeholder="Correo" required></a></li>
+                                <li><a>Correo</a></li>
+                                <li><a><input type="password" pattern="[0-9a-zA-Z.-_#$%&/]{8,16}" size="19" name="contrasena" placeholder="Contraseña" required></a></li>
+                                <li><a>Contraseña</a></li>
+                                <li><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Acceder"></a></li>
+                              </form>
+                                <li><a href="RestablecerContrasena.jsp">Olvidaste contraseña</a></li>
+                           </ul>
+                        </li>
+                        <li><a href="Registro.jsp">Registrarse&nbsp;&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                            <ul class="subs">
+                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Emuladores</a></li>
+                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
                             </ul>
-                        </nav>
-                    </div>
+                        </li>
+                        <div id="lavalamp"></div>
+                        <%
+                            }else{
+                                response.sendRedirect("Index.jsp");
+                            %>
+                        <li><a class="hsubs" href="CerrarSesion">Cerrar Sesión</a>
+                            <ul class="subs">
+                                <li><a><%out.print(session.getAttribute("usuario"));%></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="Cuenta">Mi Cuenta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                        <li><a href="MisVideojuegos">Mis Videojuegos</a></li>
+                        <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                            <ul class="subs">
+                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Emuladores</a></li>
+                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </li>
+                        <div id="lavalamp"></div>
+                        <%}//else%>
+                    </ul>
                 </div>
             </div>
             
@@ -51,7 +97,8 @@
                         <article class="column-2">
                         <h3>Registro</h3>
                         
-                        <%  String msg=(String) request.getAttribute("msg");
+                        <%  
+                          String msg=(String) request.getAttribute("msg");
                           try{  
                            if(msg.equals(null))
                                msg="a";
@@ -61,18 +108,27 @@
                             if(msg.equals("t")){
                                 %><h6 class="p2">Estudiante Registrado</h6>
                                   <h6 class="p2">Tu solicitud sera revisada y se te informara por correo electronico el proceso de tu solicitud</h6>
-                                  <a class="button-2" href="index.html">Regresar</a>
+                                  <a class="button-2" href="Index.jsp">Regresar</a>
                             <%}else{%>
                         <form action="Registrarse" method="post">
-                            <pre>Nombre:                   <input type="text" name="nombre"></pre>
-                            <pre>Apellido Paterno:      <input type="text" name="appat"></pre>
-                            <pre>Apellido Materno:      <input type="text" name="apmat"></pre>
-                            <pre>Correo electronico:    <input type="text" name="correo"></pre>
-                            <pre>Universidad:             <input type="text" name="universidad"></pre>
-                            <pre>Numero de cuenta:    <input type="text" name="cuenta"></pre>
-                            <pre>Historial Academico:  <input type="file" name="archivo"/><br /></pre>
+                            <pre>Nombre:                     <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ+ ]{1,30}" name="nombre" required/></pre>
+                            <pre>Apellido Paterno:       <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]{1,30}" name="appat" required></pre>
+                            <pre>Apellido Materno:      <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]{1,30}" name="apmat" required></pre>
+                            <pre>Correo electrónico:     <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" required></pre>
+                            <pre>Universidad:               <select name="universidad">
+  <option value="UNAM">UNAM</option>
+  <option value="IPN">IPN</option>
+  <option value="UAM">UAM</option>
+  <option value="ITESM">ITESM</option>
+  <option value="ITAM">ITAM</option>
+  <option value="UDLAP">UDLAP</option>
+  <option value="UIA">UIA</option>
+  <option selected="Otra" value="Otra">Otra</option>
+</select><br /></pre>
+                            <pre>Número de cuenta:     <input type="text" pattern="[0-9a-zA-Z]{2,20}$" name="cuenta" required></pre>
+                            <pre>Historial Académico:  <input type="file" name="archivo"/><br /></pre>
                             <%if(msg.equals("f")){
-                                %><h6 class="p2">Favor de llenar todos los campos</h6>
+                            %><h6 class="p2"><font color="#eee">Correoe Electronico Ya Registrado!</font></h6>
                             <%}%>
                             <input type="submit" class="button-2" value="Registrarse">
                         </form>
@@ -82,9 +138,9 @@
                         <article class="column-2">
                 	<div class="maxheight indent-bot">
                             <h3 class="p1">Bienvenidos Estudiantes</h3>
-                            <h6 class="p2">VideojuegosIglu otorga creditos a los estudiantes con un buen desempe?o academico que te serviran para comprar los mejores videojuegos</h6>
-                            <h6 class="p2">Solo tienes que dar clic en Registrarse llenar tus datos y sube tu historial academico </h6>
-                            <h6 class="p2">Los creditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</h6>
+                            <h6 class="p2">VideojuegosIglu otorga créditos a los estudiantes con un buen desempeño académico que te serviran para comprar los mejores videojuegos</h6>
+                            <h6 class="p2">Solo tienes que dar clic en Registrarse llenar tus datos y sube tu historial académico </h6>
+                            <h6 class="p2">Los créditos se otorgan de acuerdo a criterios de promedio y avance de creditos. Los creditos son intransferibles y solo pueden solicitarse una vez por semestre.</h6>
                         </div>
                         </article>
                         <!-- TERMINA SECCION A EDITAR -->
@@ -92,24 +148,6 @@
                 </div>
             </div>
         </header>
-        
-        <!-- Seccion de la pagina con fondo blanco-->
-        <section id="content"><div class="ic"></div>
-            <div class="main">
-                <!-- 3 imagenes secundarias (los juegos o categorias mas importantes o descargadas) -->
-                <div class="wrapper img-indent-bot">
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-1.jpg" alt=""></a>
-                    </article>
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-2.jpg" alt=""></a>
-                    </article>
-                    <article class="col-2">
-                	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
-                    </article>
-                </div>
-            </div>
-        </section>
     
         <!-- Pie de pagina. Seccion de la pagina con fondo negro -->
         <!-- informacion acerca de Iglu -->
@@ -117,7 +155,7 @@
             <div class="main">
         	<div class="aligncenter">
                     <span>Iglu &copy; 2015</span>
-                    <a rel="nofollow" class="link" target="_blank" href="index.html">Videojuegos Iglu</a> by VideojuegosIglu.com
+                    <a rel="nofollow" class="link" target="_blank" href="Index.jsp">Videojuegos Iglu</a> by iglu20151@gmail.com
                 </div>
             </div>
         </footer>

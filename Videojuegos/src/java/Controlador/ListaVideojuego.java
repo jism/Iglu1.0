@@ -73,10 +73,6 @@ public class ListaVideojuego extends HttpServlet {
                 
         LinkedList<Videojuego> lista = p.videojuegos();
         request.setAttribute("lista", lista);
-
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(lista.get(i).getArchivo());
-        }
         
         request.getRequestDispatcher("/ListaVideojuegos.jsp").forward(request, response);
         

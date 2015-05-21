@@ -59,11 +59,30 @@ public class Creditos extends HttpServlet {
             throws ServletException, IOException {
         String creditos = request.getParameter("creditos");
         String correoe = request.getParameter("correoe");
-         if(creditos.equals("") || correoe.equals("")){
+        String revision = request.getParameter("revision");
+         if(creditos.equals("") || correoe.equals("") || revision.equals("0")){
             request.getRequestDispatcher("RevisarSolicitudCredito").forward(request, response);
         }else{
             ConexionBD cbd=new ConexionBD();
-            cbd.cuenta(correoe, creditos);
+            if(revision.equals("1")){
+                String base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                int LargoContrasena = 8;
+                int longitud = base.length();
+                String contrasena="";
+                for(int i=0; i<LargoContrasena;i++){ 
+                    int numero = (int)(Math.random()*(longitud)); 
+                    String caracter=base.substring(numero, numero+1); 
+                    contrasena=contrasena+caracter; 
+                }
+                System.out.println("Pass: " +contrasena);
+                Email e=new Email();
+                boolean envio=e.sendM(correoe, creditos, contrasena, true, "");
+                if(envio){
+                    System.out.println("Enviado");
+                    cbd.cuenta(correoe, creditos);
+                }else
+                    System.out.println("No Enviado");
+            }
             request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
         }
     }
@@ -82,23 +101,79 @@ public class Creditos extends HttpServlet {
         //processRequest(request, response);
         String creditos = request.getParameter("creditos");
         String correoe = request.getParameter("correoe");
+        String revision = request.getParameter("valido");
          if(creditos.equals("") || correoe.equals("")){
             request.getRequestDispatcher("RevisarSolicitudCredito").forward(request, response);
         }else{
-            ConexionBD cbd=new ConexionBD();
-            try{
-            Class.forName("org.postgresql.Driver");
-            cbd.conexion =DriverManager.getConnection(cbd.url, cbd.username, cbd.password);
-            System.out.println("Conexion Exitosa");
-            cbd.sentencia = cbd.conexion.createStatement();
-            cbd.cuenta(correoe, creditos);
-            request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
-        }catch (SQLException e){
-            System.out.println("Error "+e);
-        }catch (Exception e){
-            System.out.println("Error "+e);
+                String base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                int LargoContrasena = 8;
+                int longitud = base.length();
+                String contrasena="";
+                for(int i=0; i<LargoContrasena;i++){ 
+                    int numero = (int)(Math.random()*(longitud)); 
+                    String caracter=base.substring(numero, numero+1); 
+                    contrasena=contrasena+caracter; 
+                }
+                //System.out.println("Pass: " +contrasena);
+          if(revision !=null){
+            if(revision.equals("1")){
+                Email e=new Email();
+                boolean envio=e.sendM(correoe, creditos, contrasena, true, "");
+                if(envio){
+                    ConexionBD cbd=new ConexionBD();
+                    try{
+                        Class.forName("org.postgresql.Driver");
+                        cbd.conexion =DriverManager.getConnection(cbd.url, cbd.username, cbd.password);
+                        System.out.println("Conexion Exitosa");
+                        cbd.sentencia = cbd.conexion.createStatement();
+                        cbd.cuenta(correoe, creditos);
+                        Encriptar en=new Encriptar();
+                        String pass=en.encriptaEnMD5(contrasena);
+                        cbd.usuario(correoe, pass);
+                        String t=correoe;
+                        request.setAttribute("msg", t);
+                        request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                    }catch (SQLException ex){
+                        System.out.println("Error "+ex);
+                    }catch (Exception ex){
+                        System.out.println("Error "+ex);
+                    }
+                }else
+                    request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+              }
+                request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+            }else{
+                
+                String [] invalido = request.getParameterValues("invalido");
+                if(invalido == null)
+                    request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                String nota="\n\n";
+                for(int i=0; i<invalido.length; i++){
+                    if(invalido[i] != null)
+                        nota=nota+"-"+invalido[i]+"\n";
+                }
+                Email e=new Email();
+                boolean envio=e.datosIncorrectos(correoe, nota);
+                if(envio){
+                    ConexionBD cbd=new ConexionBD();
+                    try{
+                        Class.forName("org.postgresql.Driver");
+                        cbd.conexion =DriverManager.getConnection(cbd.url, cbd.username, cbd.password);
+                        System.out.println("Conexion Exitosa");
+                        cbd.sentencia = cbd.conexion.createStatement();
+                        cbd.sentencia.executeUpdate("Delete From estudiante Where correoe = '"+correoe+"'");
+                        request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                    }catch (SQLException ex){
+                        System.out.println("Error "+ex);
+                    }catch (Exception ex){
+                        System.out.println("Error "+ex);
+                    }
+                    request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                }else
+                    request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+            }   
         }
-    }
+         request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
     }
 
     /**

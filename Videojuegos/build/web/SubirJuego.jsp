@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+    <%if(session.getAttribute("administrador") == null){
+        response.sendRedirect("Index.jsp");
+    }else if(session.getAttribute("administrador").equals("iglu20151@gmail.com")){
+                                
+    %>
     <head>  
     <title>Videojuegos Iglu</title>
     <meta charset="utf-8">
@@ -26,20 +30,15 @@
         <header>
             <!-- Encabezado de la pagina. Seccion de la pagina con fondo negro-->
             <div class="row-top">
-        	<div class="main">
-                    <div class="wrapper">
-                        <!-- Encabezado de pagina que manda a la pagina principal -->
-                        <h1><a href="Administrador">VideojuegosIglu<span>.com</span></a></h1>
-                        <nav>
-                            <!-- Opciones del menu principal en el encabezado -->
-                            <ul class="menu">
-                                <li><a href="ListaVideojuego">Categorias</a></li>
-                                <li><a href="RevisarSolicitudCredito">Solicitudes</a></li>
-                                <li><a href="SubirJuego.jsp">Subir Videojuego</a></li>
-                                <li><a href="index.html">Cerrar Sesion</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                <div class="main">
+                    <ul id="nav">
+                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
+                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                        <div id="lavalamp"></div>
+                    </ul>
                 </div>
             </div>
             
@@ -51,11 +50,11 @@
                             <h3>Subir Videojuego</h3><br>
                                 <form action="SubirJuego" method="post">
                                     <article class="column-2">
-					  <pre>      Nombre:                   <input type="text" name="nombre"></pre>
-					  <pre>      Desarrollador:           <input type="text" name="desarrollador"></pre>
+					  <pre>      Nombre:                     <input type="text" name="nombre"></pre>
+					  <pre>      Desarrollador:            <input type="text" name="desarrollador"></pre>
 					  <pre>      Año Lanzamiento:     <input type="text" name="ano"></pre>
-					  <pre>      Categoria:                <input type="text" name="categoria"></pre>
-					  <pre>      Precio:                    <input type="text" name="precio"></pre>
+					  <pre>      Categoria:                  <input type="text" name="categoria"></pre>
+					  <pre>      Precio:                       <input type="text" name="precio"></pre>
                                           <pre>      Descripcion:              <textarea COLS=21 ROWS=5 NAME="descripcion"></textarea></pre>
                                     </article>
                                     <article class="column-2">
@@ -65,7 +64,7 @@
 					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
                                           <input type="submit" class="button-2" value="Subir Videojuego">
                                           -->
-                                          <pre>Imagen:        <input type="file" name="imagen"/></pre><br>
+                                          <pre>Imagen:        <input type="file" name="file"/></pre><br>
                                           <pre>Video:          <input type="text" name="video"></pre><br>
 					  <pre>Videojuego:   <input type="text" name="archivo"></pre><br>
                                           <input type="submit" class="button-2" value="Guardar">
@@ -87,24 +86,6 @@
                 </div>
             </div>
         </header>
-	
-        <!-- Seccion de la pagina con fondo blanco-->
-        <section id="content"><div class="ic"></div>
-            <div class="main">
-                <!-- 3 imagenes secundarias (los juegos o categorias mas importantes o descargadas) -->
-                <div class="wrapper img-indent-bot">
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-1.jpg" alt=""></a>
-                    </article>
-                    <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-2.jpg" alt=""></a>
-                    </article>
-                    <article class="col-2">
-                	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
-                    </article>
-                </div>
-            </div>
-        </section>
     
         <!-- Pie de pagina. Seccion de la pagina con fondo negro -->
         <!-- informacion acerca de Iglu -->
@@ -112,10 +93,13 @@
             <div class="main">
         	<div class="aligncenter">
                     <span>Iglu &copy; 2015</span>
-                    <a rel="nofollow" class="link" target="_blank" href="index.html">Videojuegos Iglu</a> by VideojuegosIglu.com
+                    <a rel="nofollow" class="link" target="_blank" href="Index.jsp">Videojuegos Iglu</a> by iglu20151@gmail.com
                 </div>
             </div>
         </footer>
 
+        <%}else{
+            response.sendRedirect("Index.jsp");
+        }%>
     </body>
 </html>

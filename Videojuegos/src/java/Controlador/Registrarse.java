@@ -5,8 +5,12 @@
  */
 package Controlador;
 
+import Modelo.Estudiante;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,19 +86,43 @@ public class Registrarse extends HttpServlet {
         String universidad = request.getParameter("universidad");
         String cuenta = request.getParameter("cuenta");
         
+    try{   
+        ConexionBD cbd=new ConexionBD();
+        Class.forName("org.postgresql.Driver");
+        cbd.conexion =DriverManager.getConnection(cbd.url, cbd.username, cbd.password);
+        System.out.println("Conexion Exitosa");
+        cbd.sentencia = cbd.conexion.createStatement();
+        
         if(nombre.equals("") || appat.equals("") || apmat.equals("") || correoe.equals("") || universidad.equals("") || cuenta.equals("") ){
             String f="f";
             request.setAttribute("msg", f);
             request.getRequestDispatcher("/Registro.jsp").forward(request, response);
         }else{
-            ConexionBD cbd=new ConexionBD();
+            LinkedList<Estudiante> lista=cbd.correos();
+            boolean b=true, admin=false;
+            if(correoe.equals("iglu20151@gmail.com"))
+                admin = true;
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCorreoe().equals(correoe) || admin){
+                    String f="f";
+                    request.setAttribute("msg", f);
+                    request.getRequestDispatcher("/Registro.jsp").forward(request, response);
+                    b=false;
+                }
+            }
+            if(b){
             cbd.registrarse(nombre, appat, apmat, correoe, universidad, cuenta);
             String t="t";
             request.setAttribute("msg", t);
             request.getRequestDispatcher("/Registro.jsp").forward(request, response);
+            }
         }
         
-        
+      }catch (SQLException ex){
+        System.out.println("Error "+ex);
+      }catch (Exception ex){
+        System.out.println("Error "+ex);
+      }
     }
 
     /**

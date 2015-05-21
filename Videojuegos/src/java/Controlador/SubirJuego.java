@@ -5,17 +5,30 @@
  */
 package Controlador;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -84,13 +97,42 @@ public class SubirJuego extends HttpServlet {
         String precio = request.getParameter("precio");
         String descripcion = request.getParameter("descripcion");
         String video = request.getParameter("video");
-        String archivo = request.getParameter("archivo");
-        File img = new File(request.getParameter("imagen"));
-        Image image = ImageIO.read(img);
-        BufferedImage bi = (BufferedImage) image;
+        String archivo = "archivo";
         
-        Imagen imagen=new Imagen();
-        byte[] array=imagen.generaImagen(bi);
+        //File img = new File(request.getParameter("imagen"));
+
+        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+        InputStream inputStream = filePart.getInputStream();
+        OutputStream outputStream = null;
+ 
+	try {
+		// write the inputStream to a FileOutputStream
+		outputStream =  new FileOutputStream(new File(nombre+".jsp"));
+		int read = 0;
+		byte[] bytes = new byte[1024];
+		while ((read = inputStream.read(bytes)) != -1) {
+			outputStream.write(bytes, 0, read);
+		}
+		System.out.println("Done!");
+	} catch (IOException e) {
+		e.printStackTrace();
+	} finally {
+		if (inputStream != null) {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (outputStream != null) {
+			try {
+				outputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+ 
+		}
+	}
         
         if(nombre.equals("") || desarrollador.equals("") || ano.equals("") || categoria.equals("") || precio.equals("") || descripcion.equals("") || video.equals("") | archivo.equals("") ){
             String f="f";
@@ -98,7 +140,7 @@ public class SubirJuego extends HttpServlet {
             request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
         }else{
             ConexionBD cbd=new ConexionBD();
-            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, array, archivo);
+            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, "", archivo);
             
             String t="t";
             request.setAttribute("msg", t);
