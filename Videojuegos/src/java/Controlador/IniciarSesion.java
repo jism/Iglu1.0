@@ -85,6 +85,8 @@ public class IniciarSesion extends HttpServlet {
         HttpSession sesion = request.getSession();
         String correoe=request.getParameter("correo");
         String contrasena=request.getParameter("contrasena");
+        String val= request.getParameter("val");
+        String idd= request.getParameter("idd");
         Encriptar en=new Encriptar();
         contrasena=en.encriptaEnMD5(contrasena);
         ConexionBD p=new ConexionBD();
@@ -105,7 +107,14 @@ public class IniciarSesion extends HttpServlet {
                     if(usuarios.get(i).getContrasena().equals(contrasena)){
                         sesion.setAttribute("usuario", correoe);
                         i=usuarios.size();
-                        response.sendRedirect("Index.jsp");
+                        if(val.equals("1"))
+                            response.sendRedirect("Index.jsp");
+                        else if(val.equals("3"))
+                            response.sendRedirect("Registro.jsp");
+                        else if(val.equals("2"))
+                            response.sendRedirect("ListaVideojuego");
+                        else if(val.equals("4"))
+                            response.sendRedirect("MuestraVideojuego?i="+idd);
                     }else{
                         String t="contrasena";
                         request.setAttribute("msg", t);

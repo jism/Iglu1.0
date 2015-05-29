@@ -141,7 +141,7 @@ public class Creditos extends HttpServlet {
                 }else
                     request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
               }
-                request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                //request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
             }else{
                 
                 String [] invalido = request.getParameterValues("invalido");
@@ -168,7 +168,7 @@ public class Creditos extends HttpServlet {
                     }catch (Exception ex){
                         System.out.println("Error "+ex);
                     }
-                    request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
+                    //request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
                 }else
                     request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
             }   

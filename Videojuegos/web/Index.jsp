@@ -50,6 +50,7 @@
                                 <li><a><input type="password" pattern="[0-9a-zA-Z.-_#$%&/]{8,16}" size="19" name="contrasena" placeholder="Contraseña" required></a></li>
                                 <li><a>Contraseña</a></li>
                                 <li><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Acceder"></a></li>
+                                <input type="hidden" name="val" value="1">
                               </form>
                                 <li><a href="RestablecerContrasena.jsp">Olvidaste contraseña</a></li>
                                 <%  
@@ -71,9 +72,10 @@
                                 <li><a href="#">Emuladores</a></li>
                                 <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
                                 <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>

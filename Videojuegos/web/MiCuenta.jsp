@@ -58,9 +58,10 @@
                                 <li><a href="#">Emuladores</a></li>
                                 <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
                                 <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -125,6 +126,8 @@
                             }catch(java.lang.NullPointerException e){
                             }
                             %>
+                        <td><a rel="nofollow" class="link" target="_blank" href="pdf/<%out.print(session.getAttribute("usuario"));%>.pdf" title=><h9>&nbsp;&nbsp;Historial Académico&nbsp;&nbsp;</h9></a><br></td>
+                                
                         </article>
                         <article class="column-2">
                 	<div class="maxheight indent-bot">

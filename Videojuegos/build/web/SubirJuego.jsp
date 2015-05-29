@@ -46,16 +46,80 @@
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
-                        
                             <h3>Subir Videojuego</h3><br>
-                                <form action="SubirJuego" method="post">
+                                <form action="SubirJuego" method="post" enctype="multipart/form-data">
                                     <article class="column-2">
-					  <pre>      Nombre:                     <input type="text" name="nombre"></pre>
-					  <pre>      Desarrollador:            <input type="text" name="desarrollador"></pre>
-					  <pre>      Año Lanzamiento:     <input type="text" name="ano"></pre>
-					  <pre>      Categoria:                  <input type="text" name="categoria"></pre>
-					  <pre>      Precio:                       <input type="text" name="precio"></pre>
-                                          <pre>      Descripcion:              <textarea COLS=21 ROWS=5 NAME="descripcion"></textarea></pre>
+					  <pre>      Nombre:                     <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ+ ]{1,30}" name="nombre" required/></pre>
+					  <pre>      Desarrollador:            <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ+ ]{1,30}" name="desarrollador" required/></pre>
+					  <pre>      Año Lanzamiento:     <select name="ano" required>
+                                                                                    <option selected> ---
+                                                                                    <option value="1972">1972</option>
+                                                                                    <option value="1973">1973</option>
+                                                                                    <option value="1974">1974</option>
+                                                                                    <option value="1975">1975</option>
+                                                                                    <option value="1976">1976</option>
+                                                                                    <option value="1977">1977</option>
+                                                                                    <option value="1978">1978</option>
+                                                                                    <option value="1979">1979</option>
+                                                                                    <option value="1980">1980</option>
+                                                                                    <option value="1972">1972</option>
+                                                                                    <option value="1973">1973</option>
+                                                                                    <option value="1974">1974</option>
+                                                                                    <option value="1975">1975</option>
+                                                                                    <option value="1976">1976</option>
+                                                                                    <option value="1977">1977</option>
+                                                                                    <option value="1978">1978</option>
+                                                                                    <option value="1979">1979</option>
+                                                                                    <option value="1980">1980</option>
+                                                                                    <option value="1981">1980</option>
+                                                                                    <option value="1982">1982</option>
+                                                                                    <option value="1983">1983</option>
+                                                                                    <option value="1984">1984</option>
+                                                                                    <option value="1985">1985</option>
+                                                                                    <option value="1986">1986</option>
+                                                                                    <option value="1987">1987</option>
+                                                                                    <option value="1988">1988</option>
+                                                                                    <option value="1989">1989</option>
+                                                                                    <option value="1990">1990</option>
+                                                                                    <option value="1991">1991</option>
+                                                                                    <option value="1992">1992</option>
+                                                                                    <option value="1993">1993</option>
+                                                                                    <option value="1994">1994</option>
+                                                                                    <option value="1995">1995</option>
+                                                                                    <option value="1996">1996</option>
+                                                                                    <option value="1997">1997</option>
+                                                                                    <option value="1998">1998</option>
+                                                                                    <option value="1999">1999</option>
+                                                                                    <option value="2000">2000</option>
+                                                                                    <option value="2001">2001</option>
+                                                                                    <option value="2002">2002</option>
+                                                                                    <option value="2003">2003</option>
+                                                                                    <option value="2004">2004</option>
+                                                                                    <option value="2005">2005</option>
+                                                                                    <option value="2006">2006</option>
+                                                                                    <option value="2007">2007</option>
+                                                                                    <option value="2008">2008</option>
+                                                                                    <option value="2009">2009</option>
+                                                                                    <option value="2010">2010</option>
+                                                                                    <option value="2011">2011</option>
+                                                                                    <option value="2012">2012</option>
+                                                                                    <option value="2013">2013</option>
+                                                                                    <option value="2014">2014</option>
+                                                                                    <option value="2015">2015</option>
+                                                                                 </select></pre>
+                                          <pre>      Categoria:                  <select name="categoria" required >
+                                                                                    <option selected> ---
+                                                                                    <option value="Android">Android</option>
+                                                                                    <option value="Emuladores">Emuladores</option>
+                                                                                    <option value="iPhone">iPhone</option>
+                                                                                    <option value="PC">PC</option>
+                                                                                    <option value="PSP">PSP</option>
+                                                                                    <option value="PSX">PSX</option>
+                                                                                    <option value="Rooms">Rooms</option>
+                                                                                    <option value="Otros">Otros</option>
+                                                                                 </select></pre>
+					  <pre>      Precio:                       <input type="text" size="6" pattern="[0-9]{1,6}$" NAME="precio" required></pre>
+                                          <pre>      Descripcion:              <textarea COLS=21 ROWS=5 pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ+ ]{2,100}" NAME="descripcion" required></textarea></pre>
                                     </article>
                                     <article class="column-2">
                                         <!--
@@ -64,9 +128,9 @@
 					  <pre>Videojuego:   <input type="file" name="archivo"/><br /></pre><br>
                                           <input type="submit" class="button-2" value="Subir Videojuego">
                                           -->
-                                          <pre>Imagen:        <input type="file" name="file"/></pre><br>
-                                          <pre>Video:          <input type="text" name="video"></pre><br>
-					  <pre>Videojuego:   <input type="text" name="archivo"></pre><br>
+                                          <pre>Imagen:        <input type="file" name="file" required/></pre><br>
+                                          <pre>Video:          <input type="file" name="file2" required/></pre><br>
+					  <pre>Videojuego:   <input type="file" name="file3" required/></pre><br>
                                           <input type="submit" class="button-2" value="Guardar">
                                           
                                           <%  String msg=(String) request.getAttribute("msg");

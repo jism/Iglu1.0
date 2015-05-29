@@ -49,6 +49,7 @@
                                 <li><a><input type="password" pattern="[0-9a-zA-Z.-_#$%&/]{8,16}" size="19" name="contrasena" placeholder="Contraseña" required></a></li>
                                 <li><a>Contraseña</a></li>
                                 <li><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Acceder"></a></li>
+                              <input type="hidden" name="val" value="2">
                               </form>
                                 <li><a href="RestablecerContrasena.jsp">Olvidaste contraseña</a></li>
                            </ul>
@@ -60,9 +61,10 @@
                                 <li><a href="#">Emuladores</a></li>
                                 <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
                                 <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -93,65 +95,61 @@
         <div class="row-bot">
             <div class="row-bot-bg">
             	<div class="main">
+                    
                     <h3 class="p2">Lista de Videojuegos</h3>
                     <table style="width:100%">
                         <%
+                            HttpSession sesion = request.getSession();
+                            String correo= (String) sesion.getAttribute("usuario");
+                            String bool="false";
+                            if(correo != null){
+                                bool="true";
+                            }
                             try{
                                 LinkedList<Videojuego> lista=(LinkedList) request.getAttribute("lista");
+                                LinkedList<String> lista2=(LinkedList) request.getAttribute("lista2");
                                 
                                 if(lista.size()==0){
                                     %><h6 class="p2"><%out.println("Lista de Videojuegos vacia");%></h6><%}%>
-                            <tr>
-                                <td><font color="#eee">Nombre</font></td>
-                                <td><font color="#eee">Año</font></td>
-                                <td><font color="#eee">Precio</font></td>
-                                <td><font color="#eee">Categoria</font></td>
-                                <td><font color="#eee">Desarrollador</font></td>
-                                <td><font color="#eee">Video</font></td>
-                                <td><font color="#eee">Descarga</font></td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
                                     <%
                                 for(int i=0; i<lista.size(); i++){
                         %>
-                            <tr>
-                                <td><% out.print(lista.get(i).getNombre()); %></td>
-                                <td><% out.print(lista.get(i).getAnio()); %></td>                       
-                                <td>$<% out.print(lista.get(i).getCosto()); %></td>
-                                <td><% out.print(lista.get(i).getCategoria()); %></td>
-                                <td><% out.print(lista.get(i).getDesarrollador()); %></td>
-                                <td>Video <a title="Ver video" href="javascript:void(0);" onclick="window.open('<%out.print(lista.get(i).getVideo());%>'+'&autoplay=1', 'popup', 'left=390, top=200, width=425, height=344, toolbar=0, resizable=1')"><img src="http://www.hopechiro.com/wp-content/uploads/2013/03/icon-Play.png" title="Ver video" /></a></td>
-                                <td><input type="button" onclick=" location.href='<%out.print(lista.get(i).getArchivo());%>' " name="descarga" value="Descarga" ></td>
+                            <tr onclick="document.location='MuestraVideojuego?i=<%out.print(lista.get(i).getIdvj());%>'">
+                                <td>&nbsp;<IMG SRC="imagen/<%out.print(lista.get(i).getNombre()+" "+lista.get(i).getDesarrollador());%>.png" WIDTH=220 HEIGHT=78 BORDER=2></td>
+                                <td><br><h8><% out.print(lista.get(i).getNombre()); %></h8></td>
+                                <td><br><% out.print(lista.get(i).getCategoria()); %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <%if(lista.get(i).getCosto() > 0){
+                                    if(lista2 != null){
+                                        if(lista2.contains(Integer.toString(lista.get(i).getIdvj()))){%>
+                                            <td><br>Comprado&nbsp;&nbsp;&nbsp;</td>
+                                            <td><br><form action="archivo/<%out.print(lista.get(i).getArchivo());%>"><input type="image" src="images/descargar.png" name="image" width="170" height="30" formaction="archivo/<%out.print(lista.get(i).getArchivo());%>"></form></td>
+                                
+                                        <%}else{%>
+                                            <td><br>Precio $ <%out.print(lista.get(i).getCosto());%>&nbsp;&nbsp;&nbsp;</td>
+                                            <% if(bool.equals("true")){%>
+                                                <td><br><input type="image" value="Confirmar" src="images/comprar.png" name="image" width="170" height="30"></td>
+                                            <%}else{%>
+                                                <td><br><form action="#"><input type="image" onclick="pregunta('false')" value="Confirmar" src="images/comprar.png" name="image" width="170" height="30"></form></td>
+                                            <%}%>
+                                        <%
+                                        }
+                                    }
+                                }else{%>
+                                    <td><br>Gratuito&nbsp;&nbsp;&nbsp;</td>
+                                    <td><br><form action="archivo/<%out.print(lista.get(i).getArchivo());%>"><input type="image" src="images/descargar.png" name="image" width="170" height="30" formaction="archivo/<%out.print(lista.get(i).getArchivo());%>"></form></td>
+                                <%}%>
                             </tr>
                             <% 
                                 }
                             }catch(java.lang.NullPointerException e){
                             }
                             %>
-                        </table>  
-                        </font> 
+                        </table>
+                        <br><br>
                 </div>
             </div>
         </div>
     </header>
-
-    <section id="content"><div class="ic"></div>
-        <div class="main">
-            <div class="wrapper img-indent-bot">
-                <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-1.jpg" alt=""></a>
-                </article>
-                <article class="col-1">
-                	<a href="#"><img class="img-border" src="images/banner-2.jpg" alt=""></a>
-                </article>
-                <article class="col-2">
-                	<a href="#"><img class="img-border" src="images/banner-3.jpg" alt=""></a>
-                </article>
-            </div>
-        </div>
-    </section>
     
     <footer>
             <div class="main">
@@ -161,5 +159,16 @@
                 </div>
             </div>
         </footer>
+    <script language="JavaScript"> 
+            function pregunta(bool){
+                if(bool == "true"){
+                    document.tuformulario.submit()
+                }else{
+                    var s = confirm('Debes iniciar sesión para realizar una compra');
+                    document.tuformulario.submit()
+                }
+            } 
+        </script>
+        
 </body>
 </html>

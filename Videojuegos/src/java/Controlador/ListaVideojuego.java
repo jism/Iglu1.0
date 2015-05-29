@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,6 +74,13 @@ public class ListaVideojuego extends HttpServlet {
                 
         LinkedList<Videojuego> lista = p.videojuegos();
         request.setAttribute("lista", lista);
+        
+        HttpSession sesion = request.getSession();
+        String correo= (String) sesion.getAttribute("usuario");
+            if(sesion != null){
+                LinkedList<String> ids=p.videojuegousuario(correo);
+                request.setAttribute("lista2", ids);
+            }
         
         request.getRequestDispatcher("/ListaVideojuegos.jsp").forward(request, response);
         

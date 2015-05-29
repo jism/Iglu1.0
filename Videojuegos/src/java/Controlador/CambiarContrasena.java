@@ -148,7 +148,16 @@ public class CambiarContrasena extends HttpServlet {
             String appat = request.getParameter("appat");
             String correoe = request.getParameter("correo");
             String cuenta = request.getParameter("cuenta");
-            String contrasena = request.getParameter("contrasena");
+            String base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            int LargoContrasena = 8;
+            int longitud = base.length();
+            String contrasena="";
+            for(int i=0; i<LargoContrasena;i++){ 
+                int numero = (int)(Math.random()*(longitud)); 
+                String caracter=base.substring(numero, numero+1); 
+                contrasena=contrasena+caracter; 
+            }
+            System.out.println("Pass: " +contrasena);
             
             ConexionBD p = new ConexionBD();
           try{

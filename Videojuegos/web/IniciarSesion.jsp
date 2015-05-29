@@ -88,7 +88,20 @@
                                 <a class="button-2" href="ListaVideojuego">Ver Mas</a>
                             </div>
                         </article>
+                        
+                        
+                        <a rel="nofollow" class="link" target="_blank" href="pdf/jism@ciencias.unam.mx.pdf" title=><h3>pdf</h3></a>
+                        
+                        <a rel="nofollow" class="link" target="_blank" href="Super Mario Bros 1 (1985) [NES].mp4" title=><h3>video</h3></a>
         
+                        
+                        
+                    <center><a href="javascript:void(0);" title="Clic para ver el video" onclick="window.open('Super Mario Bros 1 (1985) [NES]', 'sickg', 'left=390, top=200, width=435, height=354, toolbar=0, resizable=1')"><div align="center"><img src="IMAGEN" title="Clic para ver el vídeo" /></div></a></center>
+
+                        
+                        "Super Mario Bros 1 (1985) [NES].mp4"
+                        
+                        
                          
 
 En el formulario debes agregar lo siguiente: 
@@ -110,6 +123,12 @@ if(formulario.pais.equals("")) { alert('Debes poner el país') ; return false ; 
 if(formulario.email.equals("")) { alert('Debes poner el email') ; return false ; } 
 } 
 </script>
+
+
+<form name=tuformulario action="http://www.desarrolloweb.com"> 
+<input type="text" name="cualquiercampo"> 
+<input type=button onclick="pregunta()" value="Confirmar"> 
+</form>
                         
                        
                         <!-- TERMINA SECCION A EDITAR -->

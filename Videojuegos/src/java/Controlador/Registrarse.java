@@ -6,7 +6,9 @@
 package Controlador;
 
 import Modelo.Estudiante;
+import Modelo.FileUpload;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,6 +18,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -79,12 +85,57 @@ public class Registrarse extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        String nombre = request.getParameter("nombre");
-        String appat = request.getParameter("appat");
-        String apmat = request.getParameter("apmat");
-        String correoe = request.getParameter("correo");
-        String universidad = request.getParameter("universidad");
-        String cuenta = request.getParameter("cuenta");
+        String nombre="";
+        String appat="";
+        String apmat="";
+        String correoe="";
+        String universidad="";
+        String cuenta="";
+        String ruta="";
+        
+        ServletFileUpload upload = new ServletFileUpload();
+        try{
+            FileItemIterator itr = upload.getItemIterator(request);
+            while(itr.hasNext()){
+                FileItemStream item = itr.next();
+                if(item.isFormField()){
+                    //do field spacific process
+                    String fieldName= item.getFieldName();
+                    InputStream is = item.openStream();
+                    byte[] b=new byte[is.available()];
+                    is.read(b);
+                    String value = new String(b);
+                    if(fieldName.equals("nombre"))
+                        nombre=value;
+                    else if(fieldName.equals("appat"))
+                        appat=value;
+                    else if(fieldName.equals("apmat"))
+                        apmat=value;
+                    else if(fieldName.equals("correo"))
+                        correoe=value;
+                    else if(fieldName.equals("universidad"))
+                        universidad=value;
+                    else if(fieldName.equals("cuenta"))
+                        cuenta=value;
+                    //response.getWriter().println(fieldName+":"+value+"<br/>");
+						
+                }else{
+                    //do file upload specific process
+                    String path = getServletContext().getRealPath("/");
+                    ruta=path;
+                    System.out.println("Path:   "+path);
+                    //call a method to upload file.
+                    if(FileUpload.processFilePDF(path, item, correoe))
+                        //response.getWriter().println("file uploaded successfully");
+                        System.out.println("file upload successfully");
+                    else
+                        //response.getWriter().println("file uploading falied");
+                        System.out.println("file uploading falied");
+                }
+            }
+	}catch(FileUploadException fue){
+            fue.printStackTrace();
+	}
         
     try{   
         ConexionBD cbd=new ConexionBD();
@@ -110,8 +161,18 @@ public class Registrarse extends HttpServlet {
                     b=false;
                 }
             }
+            
+            cbd.rs1 = cbd.sentencia.executeQuery("select nocuenta, universidad from estudiante ");
+            while(cbd.rs1.next()){
+                if(cbd.rs1.getString("nocuenta").equals(cuenta) && cbd.rs1.getString("universidad").equals(universidad)){
+                    String f="c";
+                    request.setAttribute("msg", f);
+                    request.getRequestDispatcher("/Registro.jsp").forward(request, response);
+                }
+            }
+            
             if(b){
-            cbd.registrarse(nombre, appat, apmat, correoe, universidad, cuenta);
+            cbd.registrarse(nombre, appat, apmat, correoe, universidad, cuenta, ruta);
             String t="t";
             request.setAttribute("msg", t);
             request.getRequestDispatcher("/Registro.jsp").forward(request, response);

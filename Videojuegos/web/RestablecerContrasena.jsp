@@ -60,9 +60,10 @@
                                 <li><a href="#">Emuladores</a></li>
                                 <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
                                 <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -103,8 +104,7 @@
                             <pre>Correo electrónico:     <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="correo" required></pre>
                             <pre>Apellido Paterno:       <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]{1,30}" name="appat" required></pre>
                             <pre>Número de cuenta:     <input type="text" pattern="[0-9a-zA-Z]{2,20}$" name="cuenta" required></pre>
-                            <pre>Nueva Contraseña:     <input type="password" pattern="[0-9a-zA-Z.-_#$%&/]{8,16}" size="19" name="contrasena" placeholder=" 8-16 Caracteres" required></pre>
-                            <input type="submit" class="button-2">
+                            <input type="submit" class="button-2" value="Restablecer Contraseña">
                         </form>
                         <%  
                           String msg=(String) request.getAttribute("msg");

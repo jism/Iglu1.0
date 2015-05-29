@@ -43,6 +43,7 @@
                                 <li><a><input type="password" pattern="[0-9a-zA-Z.-_#$%&/]{8,16}" size="19" name="contrasena" placeholder="Contraseña" required></a></li>
                                 <li><a>Contraseña</a></li>
                                 <li><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Acceder"></a></li>
+                              <input type="hidden" name="val" value="3">
                               </form>
                                 <li><a href="RestablecerContrasena.jsp">Olvidaste contraseña</a></li>
                            </ul>
@@ -54,9 +55,10 @@
                                 <li><a href="#">Emuladores</a></li>
                                 <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
                                 <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -95,8 +97,7 @@
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
 
                         <article class="column-2">
-                        <h3>Registro</h3>
-                        
+                        <br>
                         <%  
                           String msg=(String) request.getAttribute("msg");
                           try{  
@@ -110,7 +111,7 @@
                                   <h6 class="p2">Tu solicitud sera revisada y se te informara por correo electronico el proceso de tu solicitud</h6>
                                   <a class="button-2" href="Index.jsp">Regresar</a>
                             <%}else{%>
-                        <form action="Registrarse" method="post">
+                        <form action="Registrarse" method="post"  enctype="multipart/form-data">
                             <pre>Nombre:                     <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ+ ]{1,30}" name="nombre" required/></pre>
                             <pre>Apellido Paterno:       <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]{1,30}" name="appat" required></pre>
                             <pre>Apellido Materno:      <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]{1,30}" name="apmat" required></pre>
@@ -126,9 +127,11 @@
   <option selected="Otra" value="Otra">Otra</option>
 </select><br /></pre>
                             <pre>Número de cuenta:     <input type="text" pattern="[0-9a-zA-Z]{2,20}$" name="cuenta" required></pre>
-                            <pre>Historial Académico:  <input type="file" name="archivo"/><br /></pre>
+                            <pre>Historial Académico:  <input type="file" name="file" required/><br /></pre>
                             <%if(msg.equals("f")){
                             %><h6 class="p2"><font color="#eee">Correoe Electronico Ya Registrado!</font></h6>
+                            <%}else if(msg.equals("c")){
+                            %><h6 class="p2"><font color="#eee">Número de cuenta de la universidad Ya Registrado!</font></h6>
                             <%}%>
                             <input type="submit" class="button-2" value="Registrarse">
                         </form>

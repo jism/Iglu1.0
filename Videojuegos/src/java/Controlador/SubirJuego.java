@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.FileUpload;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -90,62 +93,99 @@ public class SubirJuego extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String nombre = request.getParameter("nombre");
-        String desarrollador = request.getParameter("desarrollador");
-        String ano = request.getParameter("ano");
-        String categoria = request.getParameter("categoria");
-        String precio = request.getParameter("precio");
-        String descripcion = request.getParameter("descripcion");
-        String video = request.getParameter("video");
-        String archivo = "archivo";
+        String nombre = "";
+        String desarrollador = "";
+        String ano = "";
+        String categoria = "";
+        String precio = "";
+        String descripcion = "";
+        String archivo = "";
+        String ruta = "";
+        int i=0;
         
-        //File img = new File(request.getParameter("imagen"));
-
-        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-        InputStream inputStream = filePart.getInputStream();
-        OutputStream outputStream = null;
- 
-	try {
-		// write the inputStream to a FileOutputStream
-		outputStream =  new FileOutputStream(new File(nombre+".jsp"));
-		int read = 0;
-		byte[] bytes = new byte[1024];
-		while ((read = inputStream.read(bytes)) != -1) {
-			outputStream.write(bytes, 0, read);
-		}
-		System.out.println("Done!");
-	} catch (IOException e) {
-		e.printStackTrace();
-	} finally {
-		if (inputStream != null) {
-			try {
-				inputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (outputStream != null) {
-			try {
-				outputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
- 
-		}
+        ServletFileUpload upload = new ServletFileUpload();
+        try{
+            FileItemIterator itr = upload.getItemIterator(request);
+            while(itr.hasNext()){
+                FileItemStream item = itr.next();
+                if(item.isFormField()){
+                    //do field spacific process
+                    String fieldName= item.getFieldName();
+                    InputStream is = item.openStream();
+                    byte[] b=new byte[is.available()];
+                    is.read(b);
+                    String value = new String(b);
+                    if(fieldName.equals("nombre"))
+                        nombre=value;
+                    else if(fieldName.equals("desarrollador"))
+                        desarrollador=value;
+                    else if(fieldName.equals("ano"))
+                        ano=value;
+                    else if(fieldName.equals("categoria"))
+                        categoria=value;
+                    else if(fieldName.equals("precio"))
+                        precio=value;
+                    else if(fieldName.equals("descripcion"))
+                        descripcion=value;
+                    //response.getWriter().println(fieldName+":"+value+"<br/>");
+						System.out.println(nombre);
+                                                System.out.println(desarrollador);
+                                                System.out.println(ano);
+                                                System.out.println(categoria);
+                                                System.out.println(precio);
+                                                System.out.println(descripcion);
+                }else{
+                    //do file upload specific process
+                  if(i==0){    
+                    String path = getServletContext().getRealPath("/");
+                    ruta=path;
+                    System.out.println("Path:   "+path);
+                    //call a method to upload file.
+                    if(FileUpload.processFileImagen(path, item, nombre+" "+desarrollador))
+                        //response.getWriter().println("file uploaded successfully");
+                        System.out.println("file upload successfully");
+                    else
+                        //response.getWriter().println("file uploading falied");
+                        System.out.println("file uploading falied");
+                    i++;
+                  }else if(i==1){    
+                    String path = getServletContext().getRealPath("/");
+                    ruta=path;
+                    System.out.println("Path:   "+path);
+                    //call a method to upload file.
+                    if(FileUpload.processFileVideo(path, item, nombre+" "+desarrollador))
+                        //response.getWriter().println("file uploaded successfully");
+                        System.out.println("file upload successfully");
+                    else
+                        //response.getWriter().println("file uploading falied");
+                        System.out.println("file uploading falied");
+                    i++;
+                  }else if(i==2){    
+                    String path = getServletContext().getRealPath("/");
+                    ruta=path;
+                    System.out.println("Path:   "+path);
+                    //call a method to upload file.
+                    if(FileUpload.processFileArchivo(path, item, nombre+" "+desarrollador)){
+                        archivo=nombre+" "+desarrollador+item.getName();
+                        //response.getWriter().println("file uploaded successfully");
+                        System.out.println("file upload successfully");
+                    }else
+                        //response.getWriter().println("file uploading falied");
+                        System.out.println("file uploading falied");
+                    i++;
+                  }
+                }
+            }
+	}catch(FileUploadException fue){
+            fue.printStackTrace();
 	}
-        
-        if(nombre.equals("") || desarrollador.equals("") || ano.equals("") || categoria.equals("") || precio.equals("") || descripcion.equals("") || video.equals("") | archivo.equals("") ){
-            String f="f";
-            request.setAttribute("msg", f);
-            request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
-        }else{
+
             ConexionBD cbd=new ConexionBD();
-            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, video, "", archivo);
+            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, ruta, ruta, archivo);
             
-            String t="t";
+            String t="exito";
             request.setAttribute("msg", t);
-            request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
-        }
+            request.getRequestDispatcher("/VideojuegoExitoso.jsp").forward(request, response);
     }
 
     /**

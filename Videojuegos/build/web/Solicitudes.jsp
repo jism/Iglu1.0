@@ -62,12 +62,14 @@
                                 LinkedList<Estudiante> lista=(LinkedList) request.getAttribute("lista");
                                 if(lista.size()==0){
                                     %><h6 class="p2"><%out.println("No hay solicitudes pendientes");%></h6><%}else{%>
+                            
+                        <!--  
                             <tr>
                                 <td><font color="#eee">Nombre</font></td>
                                 <td><font color="#eee">Correo Electrónico</font></td>
                                 <td><font color="#eee">Universidad</font></td>
                                 <td><font color="#eee">Cuenta</font></td>
-                            </tr>
+                            </tr>   --> 
                             <tr>
                                 <td>&nbsp;</td>
                             </tr>
@@ -75,23 +77,26 @@
                                 for(int i=0; i<lista.size(); i++){
                                     String nombre=lista.get(i).getNombre()+" "+lista.get(i).getAppat()+" "+lista.get(i).getApmat();
                         %>
+                          <form action="Creditos" method="post">
                             <tr>
-                                <td><% out.print(nombre); %></td>
-                                <td><% out.print(lista.get(i).getCorreoe()); %></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<% out.print(nombre); %></td>
                                 <td><% out.print(lista.get(i).getUniversidad()); %></td>
-                                <td><% out.print(lista.get(i).getCuenta()); %></td>
+                                <td><a rel="nofollow" class="link" target="_blank" href="pdf/<%out.print(lista.get(i).getCorreoe());%>.pdf" title=><h9>&nbsp;&nbsp;&nbsp;Ver Historial Académico&nbsp;&nbsp;&nbsp;</h9></a><br></td>
+                                <td><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>">Créditos: &nbsp;&nbsp; <input type="text" size="6" pattern="[0-9]{1,6}$" NAME="creditos" required></textarea></td>
+                                    
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td><form action="#" method="post"><input type="submit" value="Ver Historial"></form><br></td>
-                                <form action="Creditos" method="post">
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<% out.print(lista.get(i).getCorreoe()); %></td>
+                                <td><% out.print(lista.get(i).getCuenta()); %></td>
+                                
                                     <td>
     <div class="multiselect">
         <div class="selectBox" onclick="showCheckboxes()">
             <select>
-                <option>Select an option</option>
+                <option>Selecciona una opcion</option>
             </select>
             <div class="overSelect"></div>
         </div>
@@ -118,11 +123,11 @@
     }
 </script>
                                     </td>
-                                    <td><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>">Créditos: <input type="text" size="4" pattern="[0-9]{1,6}$" NAME="creditos" required></textarea></td>
                                     <td><input type="submit" value="Asignar"></td>
                                     
-                                </form>
-                            </tr>
+                                
+                                </tr>
+                              </form>
                             <tr>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
