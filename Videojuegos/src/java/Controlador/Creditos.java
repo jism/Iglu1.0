@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -131,7 +132,8 @@ public class Creditos extends HttpServlet {
                         String pass=en.encriptaEnMD5(contrasena);
                         cbd.usuario(correoe, pass);
                         String t=correoe;
-                        request.setAttribute("msg", t);
+                        HttpSession sesion = request.getSession();
+                        sesion.setAttribute("s", "1");
                         request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
                     }catch (SQLException ex){
                         System.out.println("Error "+ex);
@@ -162,6 +164,8 @@ public class Creditos extends HttpServlet {
                         System.out.println("Conexion Exitosa");
                         cbd.sentencia = cbd.conexion.createStatement();
                         cbd.sentencia.executeUpdate("Delete From estudiante Where correoe = '"+correoe+"'");
+                        HttpSession sesion = request.getSession();
+                        sesion.setAttribute("s", "0");
                         request.getRequestDispatcher("/RevisarSolicitudCredito").forward(request, response);
                     }catch (SQLException ex){
                         System.out.println("Error "+ex);

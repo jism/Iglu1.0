@@ -34,17 +34,41 @@
             <div class="row-top">
                 <div class="main">
                     <ul id="nav">
-                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <h1><a href="Index.jsp"><span>Administrador</span></a></h1>
                         <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
-                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
-                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                        <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                            <ul class="subs">
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </li>
                         <div id="lavalamp"></div>
                     </ul>
                 </div>
             </div>
             
             <!-- Seccion de la pagina con fondo anaranjado-->
+            <%
+            String mensaje=(String) request.getParameter("s");
+                if(mensaje!=null){
+                    if(mensaje.equals("1")){
+                    %> 
+                        <script type="text/javascript">
+                            alert("Solicitud Eliminada Datos Incorrectos");
+                        </script>
+                    <%
+                    }
+                }          
+            %>
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">

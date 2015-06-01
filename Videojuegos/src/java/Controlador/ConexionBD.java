@@ -309,15 +309,15 @@ public class ConexionBD{
         }
     }
         
-    public void subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, String imagen, String video, String archivo){
+    public int subirVideojuego(String nombre, String ano, String descripcion, String desarrollador, String costo, String categoria, String imagen, String video, String archivo){
         ConexionBD p = new ConexionBD();
+        int id=0;
         try{
             Class.forName("org.postgresql.Driver");
             p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
             System.out.println("Conexion Exitosa");
             p.sentencia = p.conexion.createStatement();
             
-            int id=0;
             p.rs1=p.sentencia.executeQuery("select * from videojuego");
             try{
                 while(p.rs1.next()){
@@ -344,6 +344,7 @@ public class ConexionBD{
             p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, año, descripcion, desarrollador, costo, categoria, imagen, video, archivo) values("+idvj+",'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', '"+imagen+"', '"+video+"', '"+archivo+"')");
             //p.sentencia.executeUpdate("insert into videojuego(idvj, nombre, ano, descripcion, desarrollador, costo, categoria, video, imagen, archivo) values("+idvj+"'"+nombre+"', "+ano+", '"+descripcion+"', '"+desarrollador+"', "+costo+", '"+categoria+"', "+v+", "+i+")");
             p.sentencia.close();
+            return id;
         }catch (SQLException e){
             System.out.println("Error "+e);
         }catch (Exception e){
@@ -357,6 +358,7 @@ public class ConexionBD{
                 }
             }
         }
+        return id;
     }
 
         public String openFileToString(byte[] _bytes)

@@ -106,11 +106,12 @@ public class IniciarSesion extends HttpServlet {
                 if(usuarios.get(i).getCorreoe().equals(correoe)){
                     if(usuarios.get(i).getContrasena().equals(contrasena)){
                         sesion.setAttribute("usuario", correoe);
+                        sesion.setAttribute("l", "1");
                         i=usuarios.size();
                         if(val.equals("1"))
                             response.sendRedirect("Index.jsp");
                         else if(val.equals("3"))
-                            response.sendRedirect("Registro.jsp");
+                            response.sendRedirect("Index.jsp");
                         else if(val.equals("2"))
                             response.sendRedirect("ListaVideojuego");
                         else if(val.equals("4"))

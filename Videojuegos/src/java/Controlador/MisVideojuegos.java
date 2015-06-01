@@ -5,13 +5,18 @@
  */
 package Controlador;
 
+import Modelo.Videojuego;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +63,41 @@ public class MisVideojuegos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/MiVideojuegos.jsp").forward(request, response);
+        //request.getRequestDispatcher("/MiVideojuegos.jsp").forward(request, response);
+        ConexionBD p = new ConexionBD();
+        try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+                
+            LinkedList<Videojuego> lista = p.videojuegos();
+            LinkedList<Videojuego> lista2 = new LinkedList();
+            LinkedList<String> ids=null;
+            
+            HttpSession sesion = request.getSession();
+            String correo= (String) sesion.getAttribute("usuario");
+            if(sesion != null){
+                ids=p.videojuegousuario(correo);
+            }
+            
+            for(int i=0; i< lista.size(); i++){
+                for(int j=0; j< ids.size(); j++){
+                    if(lista.get(i).getIdvj() == Integer.parseInt(ids.get(j))){
+                        lista2.add(lista.get(i));
+                        j=ids.size();
+                    }
+                }
+            }
+        
+            request.setAttribute("lista", lista2);
+            request.getRequestDispatcher("/MiVideojuegos.jsp").forward(request, response);
+        
+        }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }
     }
 
     /**

@@ -68,14 +68,14 @@
                         <li><a href="Registro.jsp">Registrarse&nbsp;&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -88,13 +88,14 @@
                         <li><a href="MisVideojuegos">Mis Videojuegos</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -104,6 +105,29 @@
             </div> 
             
             <!-- Seccion de la pagina con fondo anaranjado-->
+            <%
+            String mensaje=(String) request.getParameter("m");
+                if(mensaje!=null){
+                    if(mensaje.equals("1")){
+                    %> 
+                        <script type="text/javascript">
+                            alert("Usuario Eliminado del Sistema");
+                        </script>
+                    <%
+                    }
+                }          
+            %>
+            
+            <%if(session.getAttribute("l") != null){
+                if(session.getAttribute("l").equals("1")){%>
+                    <script type="text/javascript">
+                         alert("Has iniciado sesión");
+                    </script>
+                <%
+                }
+                session.removeAttribute("l");
+            }                  
+            %>
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
@@ -115,14 +139,14 @@
                                 <div class="maxheight indent-bot">
                                     <h3>Categorías</h3>
                                     <ul class="list-1">
-                                        <li><a href="#">Android</a></li>
-                                        <li><a href="#">Emuladores</a></li>
-                                        <li><a href="#">iPhon</a></li>
-                                        <li><a href="#">PC</a></li>
-					<li><a href="#">PSP</a></li>
-                                        <li><a href="#">PSX</a></li>
-					<li><a href="#">Roms</a></li>
-                                        <li><a href="#">Otros</a></li>
+                                        <li><a href="ListaVideojuego?c=1">Android</a></li>
+                                        <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                        <li><a href="ListaVideojuego?c=3">iPhone</a></li>
+                                        <li><a href="ListaVideojuego?c=4">PC</a></li>
+                                        <li><a href="ListaVideojuego?c=5">PSP</a></li>
+                                        <li><a href="ListaVideojuego?c=6">PSX</a></li>
+                                        <li><a href="ListaVideojuego?c=7">Rooms</a></li>
+                                        <li><a href="ListaVideojuego?c=8">Otros</a></li>
                                     </ul>
                                 </div>
                                 <a class="button-2" href="ListaVideojuego">Ver Mas</a>
@@ -196,6 +220,5 @@
                 });
             });
         </script>
-        
     </body>
 </html>

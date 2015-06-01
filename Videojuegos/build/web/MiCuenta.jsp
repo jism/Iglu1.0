@@ -54,14 +54,14 @@
                         <li><a href="Registro.jsp">Registrarse&nbsp;&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -74,13 +74,14 @@
                         <li><a href="MisVideojuegos">Mis Videojuegos</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -93,7 +94,6 @@
             <div class="row-bot-bg">
             	<div class="main">
                     <article class="column-2">
-                        <h3 class="p2">Datos del Usuario</h3>
                         <%
                             try{
                                 int creditos = (int) request.getAttribute("creditos");
@@ -121,12 +121,17 @@
                         <pre><%out.print(e.getNombre()+" "+e.getAppat()+" "+e.getApmat());%></pre>
                         <pre>Universidad:<%out.print("   "+e.getUniversidad());%></pre>
                         <pre>Cuenta:<%out.print("           "+e.getCuenta());%></pre>
-                            <% 
-                                
-                            }catch(java.lang.NullPointerException e){
-                            }
-                            %>
-                        <td><a rel="nofollow" class="link" target="_blank" href="pdf/<%out.print(session.getAttribute("usuario"));%>.pdf" title=><h9>&nbsp;&nbsp;Historial Académico&nbsp;&nbsp;</h9></a><br></td>
+                        <form target="_blank" action="pdf/<%out.print(session.getAttribute("usuario"));%>.pdf"><input type="image" src="images/historial.png" name="image" width="170" height="30"></form>
+                        
+                        <br><form name="tuformulario" action="EliminaUsuario" method="post">
+                            <input type="hidden" name="usuario" value="1">
+                            <input type="hidden" name="correoe" value="<%out.print(session.getAttribute("usuario"));%>">
+                        </form>
+                        <input type="image" src="images/eliminar.png" name="image" onclick="pregunta()" width="230" height="35">
+                        <%     
+                        }catch(java.lang.NullPointerException e){
+                        }
+                        %>
                                 
                         </article>
                         <article class="column-2">
@@ -150,5 +155,16 @@
                 </div>
             </div>
         </footer>
-</body>
+                        
+        <script language="JavaScript"> 
+            function pregunta(){
+                var r = confirm('¿Estás seguro de eliminar tu cuenta?');
+                if (r){ 
+                    document.tuformulario.submit()
+                }else{
+                    txt = "You pressed Cancel!";
+                }
+            } 
+        </script>
+    </body>
 </html>

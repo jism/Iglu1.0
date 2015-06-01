@@ -29,18 +29,38 @@
 
 
 <body id="page1">
-
+<%String edoev = "0";%>
 <header>
     	<div class="row-top">
                 <div class="main">
                     <ul id="nav">
-                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
                         <%if(session.getAttribute("administrador") != null){
                                 if(session.getAttribute("administrador").equals("iglu20151@gmail.com")){
-                                    response.sendRedirect("Administrador.jsp");
-                                }
+                                    //response.sendRedirect("Administrador.jsp");
+                            %>
+                                <h1><a href="Index.jsp"><span>Administrador</span></a></h1>
+                                <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
+                                <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                                <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                                <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                                    <ul class="subs">
+                                        <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                        <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                        <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                    </ul>
+                                </li>
+                                <div id="lavalamp"></div> 
+                                    
+                            <%    }
                             }else if(session.getAttribute("usuario") == null){
                             %>
+                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
                         <li><a class="hsubs">Iniciar Sesión</a>
                             <ul class="subs">
                               <form action="IniciarSesion" method="post">
@@ -57,14 +77,14 @@
                         <li><a href="Registro.jsp">Registrarse&nbsp;&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Rooms&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -77,13 +97,14 @@
                         <li><a href="MisVideojuegos">Mis Videojuegos</a></li>
                         <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
                             <ul class="subs">
-                                <li><a href="#">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Emuladores</a></li>
-                                <li><a href="#">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
-                                <li><a href="#">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">PSX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                                <li><a href="#">Otros&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
                             </ul>
                         </li>
                         <div id="lavalamp"></div>
@@ -91,12 +112,54 @@
                     </ul>
                 </div>
             </div>
+                    
+            <%if(session.getAttribute("l") != null){
+                if(session.getAttribute("l").equals("1")){%>
+                    <script type="text/javascript">
+                         alert("Has iniciado sesión");
+                    </script>
+                <%
+                }
+                session.removeAttribute("l");
+            }                  
+            %>
+            <%if(session.getAttribute("ev") != null){
+                if(session.getAttribute("ev").equals("1")){%>
+                    <script type="text/javascript">
+                         alert("Videojuego Eliminado Exitosamente");
+                    </script>
+                <%
+                }
+                session.removeAttribute("ev");
+            }                  
+            %>
        
         <div class="row-bot">
             <div class="row-bot-bg">
             	<div class="main">
+                    <%
+                        String c = (String) request.getAttribute("c");
+                        if(c == null || c.equals("0")){
+                            c="0";%>
+                            <h3 class="p2">Lista de Videojuegos</h3><%
+                        }else if(c.equals("1")){%>
+                        <h3 class="p2">Android&nbsp;&nbsp;&nbsp;<IMG SRC="images/Android.png" WIDTH=42 HEIGHT=42 BORDER=2></h3><%
+                        }else if(c.equals("2")){%>
+                            <h3 class="p2">Emuladores&nbsp;&nbsp;&nbsp;<IMG SRC="images/Emuladores.png" WIDTH=76 HEIGHT=52 BORDER=2></h3><%
+                        }else if(c.equals("3")){%>
+                            <h3 class="p2">iPhone&nbsp;&nbsp;&nbsp;<IMG SRC="images/iPhone.png" WIDTH=38 HEIGHT=38 BORDER=2></h3><%
+                        }else if(c.equals("4")){%>
+                            <h3 class="p2">PC&nbsp;&nbsp;&nbsp;<IMG SRC="images/PC.png" WIDTH=52 HEIGHT=52 BORDER=2></h3><%
+                        }else if(c.equals("5")){%>
+                            <h3 class="p2">PSP&nbsp;&nbsp;&nbsp;<IMG SRC="images/PSP.png" WIDTH=86 HEIGHT=64 BORDER=2></h3><%
+                        }else if(c.equals("6")){%>
+                            <h3 class="p2">PSX&nbsp;&nbsp;&nbsp;<IMG SRC="images/PSX.png" WIDTH=42 HEIGHT=42 BORDER=2></h3><%
+                        }else if(c.equals("7")){%>
+                            <h3 class="p2">Rooms&nbsp;&nbsp;&nbsp;<IMG SRC="images/Rooms.png" WIDTH=48 HEIGHT=48 BORDER=2></h3><%
+                        }else{%>
+                            <h3 class="p2">Otros&nbsp;&nbsp;&nbsp;<IMG SRC="images/Otros.png" WIDTH=60 HEIGHT=40 BORDER=2></h3><%
+                        }%>
                     
-                    <h3 class="p2">Lista de Videojuegos</h3>
                     <table style="width:100%">
                         <%
                             HttpSession sesion = request.getSession();
@@ -118,7 +181,20 @@
                                 <td>&nbsp;<IMG SRC="imagen/<%out.print(lista.get(i).getNombre()+" "+lista.get(i).getDesarrollador());%>.png" WIDTH=220 HEIGHT=78 BORDER=2></td>
                                 <td><br><h8><% out.print(lista.get(i).getNombre()); %></h8></td>
                                 <td><br><% out.print(lista.get(i).getCategoria()); %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                <%if(lista.get(i).getCosto() > 0){
+                                
+                            <%if(session.getAttribute("administrador") != null){
+                                    if(session.getAttribute("administrador").equals("iglu20151@gmail.com")){
+                                        if(lista.get(i).getCosto() > 0){
+                                            %><td><br>Precio $ <%out.print(lista.get(i).getCosto());%>&nbsp;&nbsp;&nbsp;</td><%
+                                        }else{%>
+                                            <td><br>Gratuito&nbsp;&nbsp;&nbsp;</td>
+                                        <%}
+                                        %>
+                                        <td><br><input type="image" src="images/informacion.png" name="image" width="170" height="30"></td>
+                                        <%
+                                    }
+                              }else{
+                                if(lista.get(i).getCosto() > 0){
                                     if(lista2 != null){
                                         if(lista2.contains(Integer.toString(lista.get(i).getIdvj()))){%>
                                             <td><br>Comprado&nbsp;&nbsp;&nbsp;</td>
@@ -129,7 +205,7 @@
                                             <% if(bool.equals("true")){%>
                                                 <td><br><input type="image" value="Confirmar" src="images/comprar.png" name="image" width="170" height="30"></td>
                                             <%}else{%>
-                                                <td><br><form action="#"><input type="image" onclick="pregunta('false')" value="Confirmar" src="images/comprar.png" name="image" width="170" height="30"></form></td>
+                                                <td><br><form action="ListaVideojuego" method="post"><input type="hidden" name="c" value="<%out.print(c);%>"><input type="image" onclick="pregunta('false')" value="Confirmar" src="images/comprar.png" name="image" width="170" height="30"></form></td>
                                             <%}%>
                                         <%
                                         }
@@ -141,6 +217,7 @@
                             </tr>
                             <% 
                                 }
+                              }
                             }catch(java.lang.NullPointerException e){
                             }
                             %>
@@ -168,7 +245,8 @@
                     document.tuformulario.submit()
                 }
             } 
-        </script>
+    </script>
+ 
         
 </body>
 </html>

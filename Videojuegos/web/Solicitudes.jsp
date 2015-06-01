@@ -39,23 +39,48 @@
             <div class="row-top">
                 <div class="main">
                     <ul id="nav">
-                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <h1><a href="Index.jsp"><span>Administrador</span></a></h1>
                         <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
-                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
-                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                        <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                            <ul class="subs">
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </li>
                         <div id="lavalamp"></div>
                     </ul>
                 </div>
             </div>
             
             <!-- Seccion de la pagina con fondo anaranjado-->
+            <%if(session.getAttribute("s") != null){
+                if(session.getAttribute("s").equals("1")){%>
+                    <script type="text/javascript">
+                         alert("Usuario Agregado al Sistema");
+                    </script>
+                <%}else{%>
+                    <script type="text/javascript">
+                        alert("Solicitud Eliminada del Sistema");
+                    </script>
+                <%}
+                session.removeAttribute("s");
+            }                  
+            %>
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
                     <!-- SECCION A EDITAR AL CAMBIAR DE PAGINAS -->
                       <article class="column-4">
-                          <h3 class="p1">Lista de Solicitudes de Credito Pendientes</h3>
+                          <h3 class="p1">Lista de Solicitudes de Crédito Pendientes</h3>
                         <table style="width:100%">
                         <%
                             try{

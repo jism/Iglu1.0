@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,7 +68,6 @@ public class MuestraVideojuego extends HttpServlet {
         //processRequest(request, response);
         String idvj = request.getParameter("i");
         Videojuego v=null;
-        System.out.println("El idvj es: "+idvj);
         ConexionBD cbd=new ConexionBD();
         try{
             Class.forName("org.postgresql.Driver");

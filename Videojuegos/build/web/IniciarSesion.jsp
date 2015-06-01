@@ -4,6 +4,9 @@
     Author     : Ivan
 --%>
 
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +104,13 @@
                         
                         "Super Mario Bros 1 (1985) [NES].mp4"
                         
-                        
+                        <%
+        Calendar fecha = new GregorianCalendar();
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        out.print("Fecha Actual: "+ dia + "/" + (mes+1) + "/" + año);
+                        %>                        
                          
 
 En el formulario debes agregar lo siguiente: 

@@ -63,6 +63,10 @@ public class ListaVideojuego extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String c="0";
+        if(request.getParameter("c") != null){
+            c=request.getParameter("c");
+        }
         ConexionBD p = new ConexionBD();
           try{
             Class.forName("org.postgresql.Driver");
@@ -73,7 +77,56 @@ public class ListaVideojuego extends HttpServlet {
                 
                 
         LinkedList<Videojuego> lista = p.videojuegos();
-        request.setAttribute("lista", lista);
+        LinkedList<Videojuego> lista2 = new LinkedList();
+        boolean b=true;
+        if(c.equals("0")){
+            request.setAttribute("lista", lista);
+            b=false;
+        }else if(c.equals("1")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Android"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("2")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Emuladores"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("3")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("iPhone"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("4")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PC"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("5")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PSP"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("6")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PSX"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("7")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Rooms"))
+                    lista2.add(lista.get(i));
+            }
+        }else{
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Otros"))
+                    lista2.add(lista.get(i));
+            }
+        }
+        
+        if(b)
+            request.setAttribute("lista", lista2);
+        request.setAttribute("c", c);
         
         HttpSession sesion = request.getSession();
         String correo= (String) sesion.getAttribute("usuario");
@@ -102,7 +155,86 @@ public class ListaVideojuego extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String c="0";
+        if(request.getParameter("c") != null){
+            c=request.getParameter("c");
+        }
+        ConexionBD p = new ConexionBD();
+          try{
+            Class.forName("org.postgresql.Driver");
+            p.conexion =DriverManager.getConnection(p.url, p.username, p.password);
+            System.out.println("Conexion Exitosa");
+            p.sentencia = p.conexion.createStatement();
+             
+                
+                
+        LinkedList<Videojuego> lista = p.videojuegos();
+        LinkedList<Videojuego> lista2 = new LinkedList();
+        boolean b=true;
+        if(c.equals("0")){
+            request.setAttribute("lista", lista);
+            b=false;
+        }else if(c.equals("1")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Android"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("2")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Emuladores"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("3")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("iPhone"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("4")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PC"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("5")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PSP"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("6")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("PSX"))
+                    lista2.add(lista.get(i));
+            }
+        }else if(c.equals("7")){
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Rooms"))
+                    lista2.add(lista.get(i));
+            }
+        }else{
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getCategoria().equals("Otros"))
+                    lista2.add(lista.get(i));
+            }
+        }
+        
+        if(b)
+            request.setAttribute("lista", lista2);
+        request.setAttribute("c", c);
+        
+        HttpSession sesion = request.getSession();
+        String correo= (String) sesion.getAttribute("usuario");
+            if(sesion != null){
+                LinkedList<String> ids=p.videojuegousuario(correo);
+                request.setAttribute("lista2", ids);
+            }
+        
+        request.getRequestDispatcher("/ListaVideojuegos.jsp").forward(request, response);
+        
+        }catch (SQLException e){
+                System.out.println("Error "+e);
+            }catch (Exception e){
+                System.out.println("Error "+e);
+            }
     }
 
     /**

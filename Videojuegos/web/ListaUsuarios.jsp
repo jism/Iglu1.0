@@ -41,17 +41,39 @@
             <div class="row-top">
                 <div class="main">
                     <ul id="nav">
-                        <h1><a href="Index.jsp">VideojuegosIglu<span>.com</span></a></h1>
+                        <h1><a href="Index.jsp"><span>Administrador</span></a></h1>
                         <li><a class="hsubs" href="CerrarSesion">Cerrar Sesion&nbsp;</a></li>
-                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
-                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
                         <li><a class="hsubs" href="RevisarSolicitudCredito">Solicitudes&nbsp;&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="Usuarios">Ver Usuarios&nbsp;&nbsp;</a></li>
+                        <li><a class="hsubs" href="SubirJuego.jsp">Subir Videojuego</a></li>
+                        <li><a class="hsubs" href="ListaVideojuego">Categorías&nbsp;&nbsp;&nbsp;</a>
+                            <ul class="subs">
+                                <li><a href="ListaVideojuego?c=1">Android&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=2">Emuladores</a></li>
+                                <li><a href="ListaVideojuego?c=3">iPhone&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=4">PC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=5">PSP&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=6">PSX&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=7">Rooms&nbsp;&nbsp;</a></li>
+                                <li><a href="ListaVideojuego?c=8">Otros&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </li>
                         <div id="lavalamp"></div>
                     </ul>
                 </div>
             </div>
             
             <!-- Seccion de la pagina con fondo anaranjado-->
+            <%if(session.getAttribute("e") != null){
+                if(session.getAttribute("e").equals("1")){%>
+                    <script type="text/javascript">
+                         alert("Usuario Eliminado del Sistema");
+                    </script>
+                <%
+                }
+                session.removeAttribute("e");
+            }                  
+            %>
             <div class="row-bot">
                 <div class="row-bot-bg">
                     <div class="main">
@@ -64,12 +86,12 @@
                                 LinkedList<Usuario> lista=(LinkedList) request.getAttribute("lista");
                                 if(lista.size()==0){
                                     %><h6 class="p2"><%out.println("No hay usuarios registrados en el sistema");%></h6><%}else{%>
-                            <tr>
+                        <!--    <tr>
                                 <td><font color="#eee">Nombre</font></td>
                                 <td><font color="#eee">Correo Electrónico</font></td>
                                 <td><font color="#eee">Creditos</font></td>
                                 <td><font color="#eee">Detalles</font></td>
-                            </tr>
+                            </tr>   -->
                             <tr>
                                 <td>&nbsp;</td>
                             </tr>
@@ -77,10 +99,10 @@
                                 for(int i=0; i<lista.size(); i++){
                         %>
                             <tr>
-                                <td><% out.print(lista.get(i).getFechavenc()); %></td>
-                                <td><% out.print(lista.get(i).getCorreoe()); %></td>
-                                <td>$ <% out.print(lista.get(i).getContrasena()); %></td>
-                                <td><form action="Usuarios" method="post"><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>"><input type="submit" value="Ver Detalles"></form></td>
+                                <td><h10>&nbsp;&nbsp;<% out.print(lista.get(i).getFechavenc()); %></h10></td>
+                                <td><h10><% out.print(lista.get(i).getCorreoe()); %></h10></td>
+                                <td><h10>Créditos: $ <% out.print(lista.get(i).getContrasena()); %></h10></td>
+                                <td><h10><form action="Usuario" method="post"><input type="hidden" name="correoe" value="<% out.print(lista.get(i).getCorreoe()); %>"><input type="image" value="Confirmar" src="images/informacion.png" name="image" width="170" height="30"></form></h10></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>

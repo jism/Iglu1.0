@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemIterator;
@@ -181,11 +182,12 @@ public class SubirJuego extends HttpServlet {
 	}
 
             ConexionBD cbd=new ConexionBD();
-            cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, ruta, ruta, archivo);
-            
-            String t="exito";
-            request.setAttribute("msg", t);
-            request.getRequestDispatcher("/VideojuegoExitoso.jsp").forward(request, response);
+            int idvj=cbd.subirVideojuego(nombre, ano, descripcion, desarrollador, precio, categoria, ruta, ruta, archivo);
+            System.out.println("El idvj de la base es : " +idvj);
+            HttpSession sesion = request.getSession();
+            sesion.setAttribute("v", "1");
+            request.setAttribute("idvj", Integer.toString(idvj));
+            request.getRequestDispatcher("/SubirJuego.jsp").forward(request, response);
     }
 
     /**

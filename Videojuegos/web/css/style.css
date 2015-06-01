@@ -218,7 +218,8 @@ h5 {margin-bottom:2px;}
 h6 {color:#fff;}
 h7 {color:#fff; font: 100% sans-serif;}
 h8 {color:#fff; font-size:18px; }
-h9 {color:#FFFFFF; background: url(../images/descarga.png);}
+h9 {color:#000; background: #fff;}
+h10 {color:#fff; font-size:16px; }
 
 .border-bot {
 	width:100%; 
