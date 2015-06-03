@@ -30,8 +30,8 @@ public class ConexionBD{
 
     public ConexionBD(){
         url = "jdbc:postgresql://localhost:5432/Iglu";
-        username = "postgres";
-        password = "89631139";
+        username = "";
+        password = "";
         conexion = null;
         sentencia=null;
         st = null;
